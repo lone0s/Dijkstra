@@ -20,7 +20,7 @@ Ces paramètres lui permettront de définir le point d'entrée (le graphe à tra
 ## Consignes d'exécution
 
 - Ouvrir un terminal dans le repértoire du fichier
-- Taper : ./Dijkstra.exe <infile> <s> <output>
+- Taper : ./Dijkstra.exe <_infile> <_s> <_output>
 
 
 ## Auteurs
