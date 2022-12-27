@@ -5,7 +5,7 @@
 int main(int argc, char** argv)
 {
     std::ifstream infile;
-    std::ostream* outstream; // outstream type replaced with ostream
+    std::ostream* outstream
     std::string infile_name;
     int s;
 
