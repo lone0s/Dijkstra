@@ -27,8 +27,10 @@ namespace AdjacencyList {
 
         ~Node();
 
+//        add operator de recopie !!!
+
         inline Successor& operator[] (size_t i) {
-            if (i >= 0 && i < numberSuccessors && this -> arraySuccessors)
+            if ((i >= 0) && (i < this -> numberSuccessors) && (this -> arraySuccessors))
                 return this -> arraySuccessors[i];
             if (! this -> arraySuccessors)
                 throw std::invalid_argument("There's currently no successors");
@@ -39,7 +41,7 @@ namespace AdjacencyList {
             return this -> idVertex;
         };
 
-        inline int getNbSuccessors() const {
+        inline size_t getNbSuccessors() const {
             return this -> numberSuccessors;
         }
 
@@ -53,7 +55,7 @@ namespace AdjacencyList {
                 }
         }
 
-        inline Successor* getSuccessors() {
+        inline Successor* getSuccessors() const{
             return this -> arraySuccessors;
         }
     };
