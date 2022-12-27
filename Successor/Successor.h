@@ -2,7 +2,7 @@
 
 #include <ostream>
 
-namespace AdjacencyList {
+namespace Dijkstra_Successor {
     /**
      * Permet d'avoir un objet contenant le couple (sommet_successeur,cout)
      */
@@ -26,7 +26,7 @@ namespace AdjacencyList {
             return *this;
         };
 
-        inline bool operator == (const Successor& successor) {
+        inline bool operator == (const Successor& successor) const{
             return (this -> idVertex == successor.idVertex && this -> weight == successor.weight);
         }
 

@@ -4,42 +4,57 @@
 
 #include "AdjacencyList.h"
 
-using namespace AdjacencyList;
+using namespace AdjacencyList_Node;
+using namespace Dijkstra_List;
+using namespace Dijkstra_Successor;
 
-adjacencyList::adjacencyList() {
+AdjacencyList::AdjacencyList() {
     this -> node = nullptr;
 }
 
-adjacencyList::adjacencyList(const int idVertex) {
+AdjacencyList::AdjacencyList(const int idVertex) {
     this -> node = new Node(idVertex);
 }
 
-adjacencyList::adjacencyList(const int idVertex, const size_t nbSuccessors, const Successor successors[]) {
+AdjacencyList::AdjacencyList(const int idVertex, const size_t nbSuccessors, const Successor successors[]) {
     this -> node = new Node(idVertex,nbSuccessors,successors);
 }
 
-adjacencyList::~adjacencyList() {
+AdjacencyList::~AdjacencyList() {
     if (node)
         delete node;
 }
 
-adjacencyList::adjacencyList(const adjacencyList &list) {
+AdjacencyList::AdjacencyList(const AdjacencyList &list) {
     this -> node = new Node(list.node->getIdParentVertex(),list.node->getNbSuccessors(),list.node->getSuccessors());
 }
 
-adjacencyList &adjacencyList::operator=(const adjacencyList &list) {
-    //Plusieurs facteurs : est ce que nullptr du node de list ? Si non, est ce que this est null ?
+//Plusieurs facteurs : est ce que nullptr du node de list ? Si non, est ce que this est null ?
+AdjacencyList &AdjacencyList::operator=(const AdjacencyList &list) {
     if (this != &list) {
-        if (this -> node)
-            delete this -> node;
-        else {
-            if (list.node != nullptr)
-                this->node = new Node(list.node->getIdParentVertex(), list.node->getNbSuccessors(),
-                                      list.node->getSuccessors());
-            else
-                this->node = nullptr;
-        }
+        delete this->node;
+        if (list.node)
+            this->node = new Node(list.node->getIdParentVertex(), list.node->getNbSuccessors(),
+                                  list.node->getSuccessors());
+        else
+            this->node = list.node;
     }
     return *this;
 }
+/*
+        if (this != &list) {
+            if (this -> node)
+                delete this -> node;
+            else {
+                if (list.node != nullptr)
+                    this->node = new Node(list.node->getIdParentVertex(), list.node->getNbSuccessors(),
+                                          list.node->getSuccessors());
+                else
+                    this->node = nullptr;
+            }
+        }
+    return *this;*/
+}
+
+
 

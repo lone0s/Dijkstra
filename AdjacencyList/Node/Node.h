@@ -7,7 +7,7 @@
 #include <iostream>
 #include "../../Successor/Successor.h"
 
-namespace AdjacencyList {
+namespace AdjacencyList_Node {
     /***
      * Structures internes d'une liste d'adjacence
      * afin de respecter l'information hiding
@@ -18,19 +18,19 @@ namespace AdjacencyList {
         int idVertex;
         size_t numberSuccessors;
         //Tableau contenant les successeurs;
-        Successor* arraySuccessors;
+        Dijkstra_Successor::Successor* arraySuccessors;
 
 
         public:
         explicit Node(const int idParent);
-        explicit Node(const int idParent, const size_t nbSuccs, const Successor array[]);
+        explicit Node(const int idParent, const size_t nbSuccs, const Dijkstra_Successor::Successor array[]);
 
         ~Node();
 
 //        add operator de recopie !!!
 
-        inline Successor& operator[] (size_t i) {
-            if ((i >= 0) && (i < this -> numberSuccessors) && (this -> arraySuccessors))
+        inline Dijkstra_Successor::Successor& operator[] (size_t i) {
+            if ((i < this -> numberSuccessors) && (this -> arraySuccessors))
                 return this -> arraySuccessors[i];
             if (! this -> arraySuccessors)
                 throw std::invalid_argument("There's currently no successors");
@@ -45,17 +45,17 @@ namespace AdjacencyList {
             return this -> numberSuccessors;
         }
 
-        inline void addSuccessors(const size_t nbSuccs, const Successor array[]) {
+        inline void addSuccessors(const size_t nbSuccs, const Dijkstra_Successor::Successor array[]) {
             this -> numberSuccessors = nbSuccs;
             if (this -> arraySuccessors)
                 delete[] this -> arraySuccessors;
-            this -> arraySuccessors = new Successor[nbSuccs];
+            this -> arraySuccessors = new Dijkstra_Successor::Successor[nbSuccs];
             for(size_t i = 0 ; i < nbSuccs ; ++i) {
                     this -> arraySuccessors[i] = array[i];
                 }
         }
 
-        inline Successor* getSuccessors() const{
+        inline Dijkstra_Successor::Successor* getSuccessors() const{
             return this -> arraySuccessors;
         }
     };

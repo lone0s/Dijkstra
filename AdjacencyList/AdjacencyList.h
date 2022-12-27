@@ -6,22 +6,22 @@
 
 #include "Node/Node.h"
 
-namespace AdjacencyList {
+namespace Dijkstra_List {
 
-    class adjacencyList {
+    class AdjacencyList {
 
     private:
-        Node* node;
+        AdjacencyList_Node::Node* node;
 
     public:
-        adjacencyList();
-        explicit adjacencyList(const int idVertex);
-        adjacencyList(const int idVertex, const size_t nbSuccessors, const Successor successors[]);
-        adjacencyList(const adjacencyList& list);
+        AdjacencyList();
+        explicit AdjacencyList(const int idVertex);
+        AdjacencyList(const int idVertex, const size_t nbSuccessors, const Dijkstra_Successor::Successor successors[]);
+        AdjacencyList(const AdjacencyList& list);
 
-        adjacencyList& operator =(const adjacencyList& list);
+        AdjacencyList& operator =(const AdjacencyList& list);
 
-        ~adjacencyList();
+        ~AdjacencyList();
 
         inline int getIdVertexParent() const {
             if (node)
@@ -29,7 +29,7 @@ namespace AdjacencyList {
             throw std::exception(); //Voir par quel genre d'exception remplacer si Node pas init
         }
 
-        inline Successor& operator[] (size_t i) const {
+        inline Dijkstra_Successor::Successor& operator[] (size_t i) const {
             if (node) {
                 try{
                     node[i];
