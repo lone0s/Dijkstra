@@ -35,22 +35,13 @@ int main() {
     }
 
     AdjacencyList list(-1,2,array);
-    std::cout << "\n--- Liste d'adjacence | Sommet : " << list.getIdVertexParent() << " | Size : " << list.lengthSuccessors() << " ---\n";
-    for (size_t i = 0 ; i < list.lengthSuccessors() ; ++i)
-        std::cout << list[i];
-    std::cout << std::endl;
+    std::cout << list << std::endl;
 
     AdjacencyList listBis(1,3,arrayBis);
-    std::cout << "\n--- Liste d'adjacence | Sommet : " << listBis.getIdVertexParent() << " | Size : " << listBis.lengthSuccessors() << "  ---\n";
-    for (size_t i = 0 ; i < listBis.lengthSuccessors() ; ++i)
-        std::cout << listBis[i];
-    std::cout << std::endl;
+    std::cout << listBis << std::endl;
 
     list = listBis;
-    std::cout << "\n--- Liste d'adjacence | Sommet : " << list.getIdVertexParent() << " | Size : " << list.lengthSuccessors() << "  ---\n";
-    for (size_t i = 0 ; i < list.lengthSuccessors() ; ++i)
-        std::cout << list[i];
-    std::cout << std::endl;
+    std::cout << list << std::endl;
 
     return EXIT_SUCCESS;
 }

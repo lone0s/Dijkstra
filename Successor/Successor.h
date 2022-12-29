@@ -39,7 +39,7 @@ namespace Dijkstra_Successor {
         };
 
         friend std::ostream& operator << (std::ostream& ostream, const Successor successor) {
-            ostream << "[successeur : " << successor.getSuccessorId() << " | cout : " << successor.weight << "]\n";
+            ostream << "[successeur : " << successor.getSuccessorId() << " | cout : " << successor.weight << "]";
             return ostream;
         };
     };

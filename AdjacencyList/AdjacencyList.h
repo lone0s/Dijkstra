@@ -29,16 +29,30 @@ namespace Dijkstra_List {
             throw std::exception(); //Voir par quel genre d'exception remplacer si Node pas init
         }
 
+        inline size_t lengthSuccessors() const{
+            if (node)
+                return node -> getNbSuccessors();
+             return -1;
+        }
+
+        /*** Overloaded operators ***/
         inline Dijkstra_Successor::Successor& operator[] (size_t i) const{
             if (node)
                 return (*this -> node)[i];
             throw std::exception(); //Voir par quel genre d'exception remplacer si Node pas init
         };
 
-        inline size_t lengthSuccessors() const{
-            if (node)
-                return node -> getNbSuccessors();
-             return -1;
+        inline friend std::ostream& operator << (std::ostream& ostream, const AdjacencyList& list) {
+            ostream << "--- Liste adjacence sommet : " << list.getIdVertexParent()
+            << " | "<< list.lengthSuccessors();
+            list.lengthSuccessors() > 1 ? ostream <<  " sommets adjacents ---\n[" : ostream <<  " sommet adjacent ---\n[";
+            for (size_t i = 0 ; i < list.lengthSuccessors() ; ++i) {
+                ostream << list[i];
+                if (i != list.lengthSuccessors() - 1)
+                    ostream << " ; " ;
+            }
+            ostream << "]";
+            return ostream;
         }
     };
 

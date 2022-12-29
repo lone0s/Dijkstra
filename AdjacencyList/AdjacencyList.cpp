@@ -29,7 +29,6 @@ AdjacencyList::AdjacencyList(const AdjacencyList &list) {
     this -> node = new Node(list.node->getIdParentVertex(),list.node->getNbSuccessors(),list.node->getSuccessors());
 }
 
-//Plusieurs facteurs : est ce que nullptr du node de list ? Si non, est ce que this est null ?
 AdjacencyList &AdjacencyList::operator=(const AdjacencyList &list) {
     if (this != &list) {
         delete this->node;
