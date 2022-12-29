@@ -11,13 +11,15 @@ using namespace Dijkstra_Successor;
 using namespace Dijkstra_List;
 
 int main() {
+
     Successor test(1,4);
     test.getSuccessorId() == 1 ? (std::cout << "Correct id\n") : (std::cout << "Wrong id\n");
     test.getSuccessorWeight() == 4 ? (std::cout << "Correct weight\n") : (std::cout << "Wrong weight\n");
     Successor array[] {Successor(1,1),Successor(2,2),Successor(3,3)};
+    Successor arrayBis[] {Successor(-1,-1), Successor(-2,-2), Successor(-3,-3)};
     size_t sizeArray = sizeof(array) / sizeof(Successor);
 
-    const Node testNode(1,sizeArray,array);
+    Node testNode(1,sizeArray,array);
 
     testNode.getNbSuccessors() == sizeArray ? std::cout << "Same size\n" : std::cout << "Different size\n";
     std::cout << "\nTest constructeur complet\n\n";
@@ -33,9 +35,22 @@ int main() {
     }
 
     AdjacencyList list(-1,2,array);
-    std::cout << "List size : " << list.getLengthSuccessors() << std::endl;
-    std::cout << "Successors : ";
-    for (size_t i = 0 ; i < list.getLengthSuccessors() ; ++i)
+    std::cout << "\n--- Liste d'adjacence | Sommet : " << list.getIdVertexParent() << " | Size : " << list.lengthSuccessors() << " ---\n";
+    for (size_t i = 0 ; i < list.lengthSuccessors() ; ++i)
         std::cout << list[i];
     std::cout << std::endl;
+
+    AdjacencyList listBis(1,3,arrayBis);
+    std::cout << "\n--- Liste d'adjacence | Sommet : " << listBis.getIdVertexParent() << " | Size : " << listBis.lengthSuccessors() << "  ---\n";
+    for (size_t i = 0 ; i < listBis.lengthSuccessors() ; ++i)
+        std::cout << listBis[i];
+    std::cout << std::endl;
+
+    list = listBis;
+    std::cout << "\n--- Liste d'adjacence | Sommet : " << list.getIdVertexParent() << " | Size : " << list.lengthSuccessors() << "  ---\n";
+    for (size_t i = 0 ; i < list.lengthSuccessors() ; ++i)
+        std::cout << list[i];
+    std::cout << std::endl;
+
+    return EXIT_SUCCESS;
 }

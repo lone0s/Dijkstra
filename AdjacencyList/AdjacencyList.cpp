@@ -33,27 +33,14 @@ AdjacencyList::AdjacencyList(const AdjacencyList &list) {
 AdjacencyList &AdjacencyList::operator=(const AdjacencyList &list) {
     if (this != &list) {
         delete this->node;
+        std::cout << "\nJust deleted the old node mf\n";
         if (list.node)
             this->node = new Node(list.node->getIdParentVertex(), list.node->getNbSuccessors(),
                                   list.node->getSuccessors());
         else
-            this->node = list.node;
+            this->node = nullptr;
     }
     return *this;
-}
-/*
-        if (this != &list) {
-            if (this -> node)
-                delete this -> node;
-            else {
-                if (list.node != nullptr)
-                    this->node = new Node(list.node->getIdParentVertex(), list.node->getNbSuccessors(),
-                                          list.node->getSuccessors());
-                else
-                    this->node = nullptr;
-            }
-        }
-    return *this;*/
 }
 
 

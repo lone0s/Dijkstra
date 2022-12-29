@@ -29,28 +29,17 @@ namespace Dijkstra_List {
             throw std::exception(); //Voir par quel genre d'exception remplacer si Node pas init
         }
 
-        inline Dijkstra_Successor::Successor& operator[] (size_t i) const {
-            if (node) {
-                try{
-                    node[i];
-                }
-                catch (std::invalid_argument& e) {
-                    std::cerr << e.what() << std::endl;
-                }
-            }
+        inline Dijkstra_Successor::Successor& operator[] (size_t i) const{
+            if (node)
+                return (*this -> node)[i];
             throw std::exception(); //Voir par quel genre d'exception remplacer si Node pas init
         };
 
-        inline size_t getLengthSuccessors() const{
+        inline size_t lengthSuccessors() const{
             if (node)
                 return node -> getNbSuccessors();
              return -1;
         }
-        /* Besoin de get idVertex
-         * get un successeur particulier
-         * get les successeurs
-         */
-
     };
 
 }

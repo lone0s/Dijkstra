@@ -29,13 +29,23 @@ namespace AdjacencyList_Node {
 
 //        add operator de recopie !!!
 
-        inline Dijkstra_Successor::Successor& operator[] (size_t i) {
+        inline Dijkstra_Successor::Successor& operator[] (size_t i) const {
             if ((i < this -> numberSuccessors) && (this -> arraySuccessors))
                 return this -> arraySuccessors[i];
             if (! this -> arraySuccessors)
                 throw std::invalid_argument("There's currently no successors");
             throw std::invalid_argument("Incorrect range value, i should be between 0 and " + std::to_string(this -> numberSuccessors - 1));
         }
+
+        inline friend std::ostream& operator << (std::ostream& ostream, const Node& node) {
+            ostream << "Noeud parent : " << node.idVertex << "\nSuccesseurs : [";
+            for (size_t i = 0 ; i < node.numberSuccessors; ++i) {
+                ostream << node[i];
+                if (i != node.numberSuccessors -1)
+                    ostream << " ; ";
+            }
+            return ostream;
+        };
 
         inline int getIdParentVertex() const {
             return this -> idVertex;
