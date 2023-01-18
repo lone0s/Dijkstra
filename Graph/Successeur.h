@@ -1,8 +1,12 @@
+//
+// Created by ohno on 1/16/2023.
+//
+
 #pragma once
 
 #include <ostream>
 
-namespace Dijkstra_Successor {
+namespace Djikstra_Data {
     /**
      * Permet d'avoir un objet contenant le couple (sommet_successeur,cout)
      */
@@ -14,8 +18,8 @@ namespace Dijkstra_Successor {
         int weight;
 
     public:
-        Successor(const int idSuccessor, const int weight);
-        Successor();
+        Successor(const int idSuccessor, const int weight) : idVertex(idSuccessor), weight(weight){};
+        Successor() : idVertex(-1), weight(-1) {};
         ~Successor() = default;
 
         inline Successor& operator =(const Successor& successor) {
@@ -42,7 +46,10 @@ namespace Dijkstra_Successor {
             ostream << "[successeur : " << successor.getSuccessorId() << " | cout : " << successor.weight << "]";
             return ostream;
         };
+
+        bool operator > (const Successor& successor) const {
+            return this -> weight > successor.weight;
+        }
     };
 
 }
-
