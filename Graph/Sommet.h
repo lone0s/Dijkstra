@@ -22,15 +22,13 @@ namespace Djikstra_Data{
             inline void addSuccesseur(const Successeur &successor) {                 // Ajoute un successeur à la liste
                 this->adjacencyList.add(successor);
             }
-            inline void addSuccesseurs(const T_List<Successeur> &listSuccesseurs) {  // Ajoute une liste de successeurs
+            inline void addSuccesseurs(const T_List<Successeur> &listSuccesseurs) {  // Ajoute une liste de successeur
                 this->adjacencyList.add(listSuccesseurs);
             }
-            inline T_List<Successeur> getAdjacencyList() const { return this->adjacencyList; }   // Retourne la liste d'adjacence
+            inline T_List<Successeur> getAdjacencyList() const { return this->adjacencyList; }
     };
 
-/*********************************************************************************************************************/
 /******************************************* SURCHARGE OPERATEUR *****************************************************/
-/*********************************************************************************************************************/
 
 /**
  * @brief Surcharge de l'operateur << pour afficher un sommet

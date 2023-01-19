@@ -21,21 +21,19 @@ namespace Djikstra_Data {
         void addSommet(const Sommet &sommet) { verticesList.add(sommet); };                  // Ajoute un sommet à la liste
         void addSommets(const T_List<Sommet> &sommets) { this->verticesList.add(sommets); }; // Ajoute une liste de sommets
         inline bool isEmpty() { return verticesList.length() == 0; };                        // Retourne si la liste est vide
-        inline size_t length() { return verticesList.length(); };                            // Retourne la taille de la liste de sommets
+        inline size_t length() { return verticesList.length(); };                            // Retourne le nombre de sommets
 
         //Operateurs
         friend std::ostream &operator<<(std::ostream &ostream, const Graph &graph);
         Sommet operator [](size_t i);
     };
 
-/*********************************************************************************************************************/
 /******************************************* SURCHARGE OPERATEUR *****************************************************/
-/*********************************************************************************************************************/
 
     /**
      * @brief Surcharge de l'operateur << pour afficher un graphe
-     * @param ostream
-     * @param graph
+     * @param ostream le flux de sortie
+     * @param graph le graphe à afficher
      * @return
      */
     std::ostream &operator<<(std::ostream &ostream, const Graph &graph) {

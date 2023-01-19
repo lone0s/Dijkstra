@@ -26,8 +26,8 @@ class T_Node {
         T_Node() : size(0), capacity(BASE_SIZE), data(new T[capacity]) {};
         explicit T_Node(const T& elem) : size(1), capacity(BASE_SIZE), data(new T[capacity]{elem}) {};
         explicit T_Node(size_t size) : size(0), capacity(size), data(new T[capacity]) {
-            #undef BASE_SIZE
-            #define BASE_SIZE size
+            #undef BASE_SIZE        //On enlève la définition de BASE_SIZE
+            #define BASE_SIZE size  // On la réintroduit avec pour nouvelle valeur, celle fournie par l'utilisateur
         };
         //Destructeur
         ~T_Node() {
@@ -35,24 +35,24 @@ class T_Node {
                 delete[] data;
         }
         //Operations
-        T get(size_t i);                                        // Retourne l'element à la position i
-        T* getData() {return this -> data;};                    // Retourne le tableau de données
-        void add(const T& elem);                                // Ajoute un element à la fin du tableau
-        void add(const T_Node<T>& node);                        // Ajoute les elements d'un noeud à la fin du tableau
-        void remove(size_t index);                              // Supprime l'element à la position i
-        inline size_t length() const {return this -> size;} ;   // Retourne la taille accessible à l'utilisateur du tableau
+        T get(size_t i);                                      // Retourne l'element à la position i
+        T* getData() {return this -> data;};                  // Retourne le tableau de données
+        void add(const T& elem);                              // Ajoute un element à la fin du tableau
+        void add(const T_Node<T>& node);                      // Ajoute les elements d'un noeud à la fin du tableau
+        void remove(size_t index);                            // Supprime l'element à la position i
+        inline size_t length() const {return this -> size;} ; // Retourne la taille accessible à du tableau
         //Iterateurs
-        iterator begin() {return &data[0];}                     // Retourne un pointeur vers le premier element
-        const_iterator begin() const {return &data[0];}         // Retourne un pointeur constant vers le premier element
-        iterator end() {return &data[size];}                    // Retourne un pointeur vers le dernier element
-        const_iterator end() const {return &data[size];}        // Retourne un pointeur constant vers le dernier element
+        iterator begin() {return &data[0];}                   // Retourne un pointeur vers le premier element
+        const_iterator begin() const {return &data[0];}       // Retourne un pointeur constant vers le premier element
+        iterator end() {return &data[size];}                  // Retourne un pointeur vers le dernier element
+        const_iterator end() const {return &data[size];}      // Retourne un pointeur constant vers le dernier element
 };
-/*********************************************************************************************************************/
+
 /********************************************* PRIVATE FUNCTIONS *****************************************************/
-/*********************************************************************************************************************/
+
 /**
  * @brief Augmente la taille du tableau de données
- * @tparam T
+ * @tparam T type determiné à la compilation
  */
 template<typename T>
 void T_Node<T>::reallocMore() {
@@ -64,7 +64,7 @@ void T_Node<T>::reallocMore() {
 }
 /**
  * @brief Diminue la taille du tableau de données
- * @tparam T
+ * @tparam T type determiné à la compilation
  */
 template<typename T>
 void T_Node<T>::reallocLess() {
@@ -78,15 +78,15 @@ void T_Node<T>::reallocLess() {
     capacity /= 2;
 }
 
-/*********************************************************************************************************************/
 /********************************************** PUBLIC FUNCTIONS *****************************************************/
-/*********************************************************************************************************************/
+
 /**
  * @brief Retourne l'element à la position i
- * @tparam T
- * @param i
- * @return T
+ * @tparam T type determiné à la compilation
+ * @param i position de l'element
+ * @return T element à la position i
  */
+
 template<typename T>
 T T_Node<T>::get(const size_t i) {
     if (i >= 0 && i < size)
@@ -96,8 +96,8 @@ T T_Node<T>::get(const size_t i) {
 
 /**
  * @brief Ajoute un element à la fin du tableau
- * @tparam T
- * @param elem
+ * @tparam T type determiné à la compilation
+ * @param elem element à ajouter
  */
 template<typename T>
 void T_Node<T>::add(const T &elem) {
@@ -108,8 +108,8 @@ void T_Node<T>::add(const T &elem) {
 
 /**
  * @brief Ajoute les elements d'un noeud à la fin du tableau
- * @tparam T
- * @param node
+ * @tparam T type determiné à la compilation
+ * @param node noeud à ajouter
  */
 template<typename T>
 void T_Node<T>::add(const T_Node<T> &node) {
@@ -121,8 +121,8 @@ void T_Node<T>::add(const T_Node<T> &node) {
 
 /**
  * @brief Supprime l'element à la position i
- * @tparam T
- * @param index
+ * @tparam T type determiné à la compilation
+ * @param index position de l'element à supprimer
  */
 template<typename T>
 void T_Node<T>::remove(size_t index) {

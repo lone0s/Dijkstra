@@ -8,12 +8,15 @@ template <typename T>
 class T_PriorityQueue {
     private:
         T_Node<T> *start; //Code modulaire tout ça tout ça..
+
         //Methode du tri par tas
         void rearrange(size_t indexMin, size_t indexMax);   //Methode qui permet de remettre en ordre le tas
         void heapSort(size_t index);                        //Methode qui permet de trier le tas
+
         //Iterateurs
         typedef T* iterator;
         typedef const T* const_iterator;
+
     public:
         //Constructeurs
         T_PriorityQueue() : start(nullptr) {};                                                      // Sans argument
@@ -28,10 +31,10 @@ class T_PriorityQueue {
 
         //Operations
         void add(const T &elem);                                                // Ajoute un element à la fin de la liste
-        T pop();                                                                // Retire le premier element de la liste et le retourne
+        T pop();                                                                // Retourne et retire le premier element
         inline size_t length() const { return (start ? start->length() : 0); }; // Retourne la taille de la liste
         inline bool isEmpty() const { return this->start; };                    // Retourne si la file est vide
-        inline T top(size_t i) const {                                          // Retourne l'element à la position i (sans suppr)
+        inline T top() const {                                                  // Retourne le premier element
             return (start ? start -> get(0) : throw std::runtime_error("Queue is empty !\n"));
         };
 
@@ -54,16 +57,13 @@ class T_PriorityQueue {
         throw std::runtime_error("List is empty");}
 };
 
-/*********************************************************************************************************************/
 /******************************************* SURCHARGE OPERATEUR *****************************************************/
-/*********************************************************************************************************************/
 
 /**
  * @brief Surcharge de l'operateur << pour afficher la liste
- * @tparam T
- * @param ostream
- * @param pQueue
- * @return
+ * @tparam T type défini à la compilation
+ * @param ostream flux de sortie
+ * @param pQueue liste à afficher
  */
 template<typename T>
 std::ostream& operator << (std::ostream& ostream, const T_PriorityQueue<T>& pQueue) {
@@ -76,15 +76,14 @@ std::ostream& operator << (std::ostream& ostream, const T_PriorityQueue<T>& pQue
     std::cout << "]\n";
     return ostream;
 }
-/*********************************************************************************************************************/
+
 /********************************************* PRIVATE FUNCTIONS *****************************************************/
-/*********************************************************************************************************************/
 
 /**
  * @brief Methode qui permet de remettre en ordre le tas
- * @tparam T
- * @param indexMin
- * @param indexMax
+ * @tparam T type défini à la compilation
+ * @param indexMin éponyme
+ * @param indexMax éponyme
  */
 template <typename T>
 void T_PriorityQueue<T>::rearrange(size_t indexMin, size_t indexMax) {
@@ -103,8 +102,8 @@ void T_PriorityQueue<T>::rearrange(size_t indexMin, size_t indexMax) {
 
 /**
  * @brief Methode qui permet de trier le tas
- * @tparam T
- * @param index
+ * @tparam T type défini à la compilation
+ * @param index éponyme
  */
 template<typename T>
 void T_PriorityQueue<T>::heapSort(size_t index) {
@@ -115,14 +114,13 @@ void T_PriorityQueue<T>::heapSort(size_t index) {
         rearrange(0, i);
     }
 }
-/*********************************************************************************************************************/
+
 /********************************************** PUBLIC FUNCTIONS *****************************************************/
-/*********************************************************************************************************************/
 
 /**
  * @brief Ajoute un element à la fin de la liste
- * @tparam T
- * @param elem
+ * @tparam T type défini à la compilation
+ * @param elem element à ajouter
  */
 template<typename T>
 void T_PriorityQueue<T>::add(const T &elem) {
@@ -135,8 +133,8 @@ void T_PriorityQueue<T>::add(const T &elem) {
 
 /**
  * @brief Retire le premier element de la liste
- * @tparam T
- * @return
+ * @tparam T type determiné à la compilation
+ * @return le premier element de la liste (ou une exception si la liste est vide)
  */
 template<typename T>
 T T_PriorityQueue<T>::pop() {
