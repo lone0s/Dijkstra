@@ -12,14 +12,16 @@ namespace Djikstra_Data {
         //Constructeurs
         Graph() : verticesList() {};                                                // Sans argument
         explicit Graph(size_t verticesSize) : verticesList(verticesSize) {};   // Avec une taille de liste donnée
-        Graph(const Graph &graph) : verticesList(graph.verticesList) {};            // Par copie
+        explicit Graph(const Graph &graph) : verticesList(graph.verticesList) {};   // Par copie
         //Destructeur
         ~Graph() = default;
         //Operations
         void addSommet(const Sommet &sommet) { verticesList.add(sommet); };                 // Ajoute un sommet à la liste
         void addSommets(const T_List<Sommet> &sommets) { this->verticesList.add(sommets); }; // Ajoute une liste de sommets
+        inline bool isEmpty() { return verticesList.length() == 0; };                            // Retourne si la liste est vide
         //Operateurs
         friend std::ostream &operator<<(std::ostream &ostream, const Graph &graph);
+        Sommet operator [](size_t i);
     };
 
 /*********************************************************************************************************************/
@@ -38,5 +40,9 @@ namespace Djikstra_Data {
             std::cout << graph.verticesList.get(i);
         std::cout << "}\n";
         return ostream;
+    }
+
+    Sommet Graph::operator[](size_t i) {
+        return this -> verticesList.get(i);
     }
 }

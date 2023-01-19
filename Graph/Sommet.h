@@ -10,7 +10,7 @@ namespace Djikstra_Data{
     class Sommet {
         private:
             size_t idVertex;                    // Identifiant du sommet
-            T_List<Successor> adjacencyList;    // Liste des successeurs du sommet
+            T_List<Successeur> adjacencyList;    // Liste des successeurs du sommet
         public:
             //Constructeurs
             explicit Sommet(const size_t id) : idVertex(id), adjacencyList() {};    // Avec un argument
@@ -18,13 +18,14 @@ namespace Djikstra_Data{
             //Destructor
             ~Sommet() = default;
             friend std::ostream &operator<<(std::ostream &ostream, const Sommet &sommet);
-            inline void addSuccesseur(const Successor &successor) {                 // Ajoute un successeur à la liste
+            Successeur operator[](const size_t i);
+            inline void addSuccesseur(const Successeur &successor) {                 // Ajoute un successeur à la liste
                 this->adjacencyList.add(successor);
             }
-            inline void addSuccesseurs(const T_List<Successor> &listSuccesseurs) {  // Ajoute une liste de successeurs
+            inline void addSuccesseurs(const T_List<Successeur> &listSuccesseurs) {  // Ajoute une liste de successeurs
                 this->adjacencyList.add(listSuccesseurs);
             }
-            inline T_List<Successor> getAdjacencyList() const { return this->adjacencyList; }   // Retourne la liste d'adjacence
+            inline T_List<Successeur> getAdjacencyList() const { return this->adjacencyList; }   // Retourne la liste d'adjacence
     };
 
 /*********************************************************************************************************************/
@@ -40,6 +41,11 @@ namespace Djikstra_Data{
     std::ostream &operator<<(std::ostream &ostream, const Sommet &sommet) {
         std::cout << "Sommet: " << sommet.idVertex << " - " << sommet.adjacencyList;
         return ostream;
+    }
+
+
+    Successeur Sommet::operator[](const size_t i) {
+        return this -> adjacencyList.get(i);
     }
 
 }
