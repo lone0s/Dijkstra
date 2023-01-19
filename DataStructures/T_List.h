@@ -14,44 +14,60 @@ class T_List {
         typedef const T* const_iterator;
     public:
         //Constructeurs
-        T_List() : start(nullptr) {};
-        explicit T_List(const T& elem) : start(new T_Node<T>(elem)) {};
-        T_List(const T_List<T>& list) : start(new T_Node<T>(*list.start)) {};
+        T_List() : start(nullptr) {};                                           // Sans argument
+        explicit T_List(const T& elem) : start(new T_Node<T>(elem)) {};         // Avec un element
+        explicit T_List(size_t size) : start(new T_Node<T>(size)) {};           // Avec une taille donnée
+        T_List(const T_List<T>& list) : start(new T_Node<T>(*list.start)) {};   // Par copie
         //Destructeur
         ~T_List() {
             if (this -> start)
                 delete start;
         }
         //Operations
-        inline size_t length() const {return (start ? start->length() : 0);} ;
-        inline bool isEmpty() const {return this -> start;};
-        inline T get(size_t i) const;
-        void add(const T& elem);
-        void add(const T_List<T>& list);
-        void remove(size_t index);
+        inline size_t length() const {return (start ? start->length() : 0);} ;  // Retourne la taille de la liste
+        inline bool isEmpty() const {return this -> start;};                    // Retourne si la liste est vide
+        inline T get(size_t i) const;                                           // Retourne l'element à la position i
+        void add(const T& elem);                                                // Ajoute un element à la fin de la liste
+        void add(const T_List<T>& list);                                        // Ajoute les elements d'une liste à la fin de la liste
+        void remove(size_t i);                                                  // Supprime l'element à la position i
         //Operateurs
         T_List<T>& operator= (const T_List<T>& list);
         template<typename U>
         friend std::ostream& operator <<(std::ostream& ostream,const T_List<U>& list);
-        //Iterateurs
-        iterator begin() {if(start)
-            return this->start->begin() ;
-        throw std::runtime_error("List is empty");}
-        iterator end() {if(start)
-                return this->start->end();
-            throw std::runtime_error("List is empty");}
-        const_iterator begin() const {if(start)
+        //Iterateurs (permettent d'implémenter les for each boucles)
+        iterator begin() {                                          // Retourne un pointeur vers le premier element
+            if(start)
                 return this->start->begin() ;
-            throw std::runtime_error("List is empty");}
-        const_iterator end() const {if(start)
+            throw std::runtime_error("List is empty");
+        }
+        iterator end() {                                            // Retourne un pointeur vers le dernier element
+            if(start)
                 return this->start->end();
-            throw std::runtime_error("List is empty");}
+            throw std::runtime_error("List is empty");
+        }
+        const_iterator begin() const {                              // Retourne un pointeur constant vers le premier element
+            if(start)
+                return this->start->begin() ;
+            throw std::runtime_error("List is empty");
+        }
+        const_iterator end() const {                                // Retourne un pointeur constant vers le dernier element
+            if(start)
+                return this->start->end();
+            throw std::runtime_error("List is empty");
+        }
 };
 
 /*********************************************************************************************************************/
 /******************************************* SURCHARGE OPERATEUR *****************************************************/
 /*********************************************************************************************************************/
 
+/**
+ * Surcharge de l'operateur << pour afficher une liste
+ * @tparam T
+ * @param ostream
+ * @param list
+ * @return
+ */
 template<typename T>
 std::ostream& operator << (std::ostream& ostream, const T_List<T>& list) {
     std::cout << "[";
@@ -64,6 +80,12 @@ std::ostream& operator << (std::ostream& ostream, const T_List<T>& list) {
     return ostream;
 }
 
+/**
+ * Surcharge de l'operateur = pour copier une liste
+ * @tparam T
+ * @param list
+ * @return
+ */
 template<typename T>
 T_List<T> &T_List<T>::operator=(const T_List<T> &list) {
     if (this != &list){
@@ -77,6 +99,12 @@ T_List<T> &T_List<T>::operator=(const T_List<T> &list) {
 /********************************************** PUBLIC FUNCTIONS *****************************************************/
 /*********************************************************************************************************************/
 
+/**
+ * Retourne l'element à la position i
+ * @tparam T
+ * @param i
+ * @return
+ */
 template<typename T>
 void T_List<T>::add(const T &elem) {
     if (!this -> start)
@@ -85,6 +113,11 @@ void T_List<T>::add(const T &elem) {
         this -> start->add(elem);
 }
 
+/**
+ * Ajoute les elements d'une liste à la fin de la liste
+ * @tparam T
+ * @param list
+ */
 template<typename T>
 void T_List<T>::add(const T_List<T>& list) {
     if(!this -> start)
@@ -93,12 +126,24 @@ void T_List<T>::add(const T_List<T>& list) {
         this -> start->add(*list.start);
 }
 
+/**
+ * Retire l'element à la position i
+ * @tparam T
+ * @param i
+ * @return
+ */
 template<typename T>
-void T_List<T>::remove(size_t index) {
+void T_List<T>::remove(size_t i) {
     if (this -> start)
-        this -> start->remove(index);
+        this -> start->remove(i);
 }
 
+/**
+ * Retourne l'element à la position i
+ * @tparam T
+ * @param i
+ * @return
+ */
 template<typename T>
 T T_List<T>::get(size_t i) const {
     return this -> start->get(i);

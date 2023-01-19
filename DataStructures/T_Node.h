@@ -8,7 +8,7 @@
 template <typename T>
 class T_Node {
     private:
-        //Représente la taille du tableau accesible à l'utilisateur
+        //Représente la taille du tableau indiquée et accessible à l'utilisateur
         size_t size;
         //Représente la taille réelle du tableau
         size_t capacity;
@@ -35,21 +35,25 @@ class T_Node {
                 delete[] data;
         }
         //Operations
-        T get(size_t i);
-        T* getData() {return this -> data;};
-        void add(const T& elem);
-        void add(const T_Node<T>& node);
-        void remove(size_t index);
-        inline size_t length() const {return this -> size;} ;
+        T get(size_t i);                                        // Retourne l'element à la position i
+        T* getData() {return this -> data;};                    // Retourne le tableau de données
+        void add(const T& elem);                                // Ajoute un element à la fin du tableau
+        void add(const T_Node<T>& node);                        // Ajoute les elements d'un noeud à la fin du tableau
+        void remove(size_t index);                              // Supprime l'element à la position i
+        inline size_t length() const {return this -> size;} ;   // Retourne la taille accessible à l'utilisateur du tableau
         //Iterateurs
-        iterator begin() {return &data[0];}
-        const_iterator begin() const {return &data[0];}
-        iterator end() {return &data[size];}
-        const_iterator end() const {return &data[size];}
+        iterator begin() {return &data[0];}                     // Retourne un pointeur vers le premier element
+        const_iterator begin() const {return &data[0];}         // Retourne un pointeur constant vers le premier element
+        iterator end() {return &data[size];}                    // Retourne un pointeur vers le dernier element
+        const_iterator end() const {return &data[size];}        // Retourne un pointeur constant vers le dernier element
 };
 /*********************************************************************************************************************/
 /********************************************* PRIVATE FUNCTIONS *****************************************************/
 /*********************************************************************************************************************/
+/**
+ * @brief Augmente la taille du tableau de données
+ * @tparam T
+ */
 template<typename T>
 void T_Node<T>::reallocMore() {
     T* temp = new T[capacity * 2];
@@ -58,7 +62,10 @@ void T_Node<T>::reallocMore() {
     data = temp;
     capacity *= 2;
 }
-
+/**
+ * @brief Diminue la taille du tableau de données
+ * @tparam T
+ */
 template<typename T>
 void T_Node<T>::reallocLess() {
     size_t newSize = capacity / 2;
@@ -74,7 +81,12 @@ void T_Node<T>::reallocLess() {
 /*********************************************************************************************************************/
 /********************************************** PUBLIC FUNCTIONS *****************************************************/
 /*********************************************************************************************************************/
-
+/**
+ * @brief Retourne l'element à la position i
+ * @tparam T
+ * @param i
+ * @return T
+ */
 template<typename T>
 T T_Node<T>::get(const size_t i) {
     if (i >= 0 && i < size)
@@ -82,6 +94,11 @@ T T_Node<T>::get(const size_t i) {
     throw std::invalid_argument("List indices go from 0 to " + std::to_string(this->size));
 }
 
+/**
+ * @brief Ajoute un element à la fin du tableau
+ * @tparam T
+ * @param elem
+ */
 template<typename T>
 void T_Node<T>::add(const T &elem) {
     if (this -> size == this -> capacity)
@@ -89,23 +106,32 @@ void T_Node<T>::add(const T &elem) {
     data[size++] = elem;
 }
 
+/**
+ * @brief Ajoute les elements d'un noeud à la fin du tableau
+ * @tparam T
+ * @param node
+ */
 template<typename T>
 void T_Node<T>::add(const T_Node<T> &node) {
-    while (this -> size + node.size > this -> capacity)
-        reallocMore();
+    while (this -> size + node.size > this -> capacity)     // On verifie si le tableau est assez grand
+        reallocMore();                                      // Si non, on augmente sa taille
     std::move(node.data,node.data + node.size,data + size);
     size += node.size;
 }
 
+/**
+ * @brief Supprime l'element à la position i
+ * @tparam T
+ * @param index
+ */
 template<typename T>
 void T_Node<T>::remove(size_t index) {
     if (index >= 0 && index < size) {
-        std::move(data + index + 1,data + size,data + index);
+        std::move(data + index + 1, data + size, data + index);
         size--;
-        if(size < capacity / 2)
-            reallocLess();
+        if (size < capacity / 2) {   //Si la capacité du tableau est trop grande par rapport aux données qu'il contient
+            reallocLess();          //On diminue sa taille
+        } else
+            throw std::invalid_argument("List indices go from 0 to " + std::to_string(this->size));
     }
-    else
-        throw std::invalid_argument("List indices go from 0 to " + std::to_string(this->size));
 }
-
