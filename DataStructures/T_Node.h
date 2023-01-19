@@ -5,44 +5,51 @@
 #include <iostream>
 #define BASE_SIZE 5
 
-
 template <typename T>
 class T_Node {
-private:
-    //Représente la taille du tableau accesible à l'utilisateur
-    size_t size;
-    //Représente la taille réelle du tableau
-    size_t capacity;
-    T* data;
-    //Gestion de l'allocation "dynamique"
-    void reallocMore();
-    void reallocLess();
+    private:
+        //Représente la taille du tableau accesible à l'utilisateur
+        size_t size;
+        //Représente la taille réelle du tableau
+        size_t capacity;
+        //Tableau de données
+        T* data;
+        //Gestion de l'allocation "dynamique"
+        void reallocMore();
+        void reallocLess();
+        //Gestion foreach loop
+        typedef T* iterator;
+        typedef const T* const_iterator;
 
-public:
-    //Constructeurs
-    T_Node() : size(0), capacity(BASE_SIZE), data(new T[capacity]) {};
-    explicit T_Node(const T& elem) : size(1), capacity(BASE_SIZE), data(new T[capacity]{elem}) {};
-    T_Node(const T_Node<T>& node) : size(node.size), capacity(node.capacity), data(new T[capacity]) {
-        std::move(node.data,node.data + size,data);
-    }
-    //Destructeur
-    ~T_Node() {
-        if(data)
-            delete[] data;
-    }
-    //Operations
-    T get(size_t i);
-    T* getData() {return this -> data;};
-    void add(const T& elem);
-    void add(const T_Node<T>& node);
-    void remove(size_t index);
-    inline size_t length() const {return this -> size;} ;
+    public:
+        //Constructeurs
+        T_Node() : size(0), capacity(BASE_SIZE), data(new T[capacity]) {};
+        explicit T_Node(const T& elem) : size(1), capacity(BASE_SIZE), data(new T[capacity]{elem}) {};
+        explicit T_Node(size_t size) : size(0), capacity(size), data(new T[capacity]) {
+            #undef BASE_SIZE
+            #define BASE_SIZE size
+        };
+        //Destructeur
+        ~T_Node() {
+            if(data)
+                delete[] data;
+        }
+        //Operations
+        T get(size_t i);
+        T* getData() {return this -> data;};
+        void add(const T& elem);
+        void add(const T_Node<T>& node);
+        void remove(size_t index);
+        inline size_t length() const {return this -> size;} ;
+        //Iterateurs
+        iterator begin() {return &data[0];}
+        const_iterator begin() const {return &data[0];}
+        iterator end() {return &data[size];}
+        const_iterator end() const {return &data[size];}
 };
-
 /*********************************************************************************************************************/
 /********************************************* PRIVATE FUNCTIONS *****************************************************/
 /*********************************************************************************************************************/
-
 template<typename T>
 void T_Node<T>::reallocMore() {
     T* temp = new T[capacity * 2];

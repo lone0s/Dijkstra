@@ -11,7 +11,10 @@ class T_PriorityQueue {
         //Methode du tri par tas
         void heapify(size_t indexMin, size_t indexMax);
         void heapSort(size_t index);
-    public:
+        //Iterateurs
+        typedef T* iterator;
+        typedef const T* const_iterator;
+public:
         //Constructeurs
         T_PriorityQueue() : start(nullptr) {};
         explicit T_PriorityQueue(const T &elem) : start(new T_Node<T>(elem)) {};
@@ -29,6 +32,19 @@ class T_PriorityQueue {
         //Operateurs
         template<typename U>
         friend std::ostream &operator<<(std::ostream &ostream, const T_PriorityQueue<U> &list);
+        //Iterateurs
+        iterator begin() {if(start)
+                return this->start->begin() ;
+            throw std::runtime_error("List is empty");}
+        iterator end() {if(start)
+            return this->start->end();
+        throw std::runtime_error("List is empty");}
+        const_iterator begin() const {if(start)
+            return this->start->begin() ;
+        throw std::runtime_error("List is empty");}
+        const_iterator end() const {if(start)
+            return this->start->end();
+        throw std::runtime_error("List is empty");}
 };
 
 /*********************************************************************************************************************/

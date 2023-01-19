@@ -9,6 +9,9 @@ template <typename T>
 class T_List {
     private:
         T_Node<T>* start;
+        //Iterateurs
+        typedef T* iterator;
+        typedef const T* const_iterator;
     public:
         //Constructeurs
         T_List() : start(nullptr) {};
@@ -30,6 +33,19 @@ class T_List {
         T_List<T>& operator= (const T_List<T>& list);
         template<typename U>
         friend std::ostream& operator <<(std::ostream& ostream,const T_List<U>& list);
+        //Iterateurs
+        iterator begin() {if(start)
+            return this->start->begin() ;
+        throw std::runtime_error("List is empty");}
+        iterator end() {if(start)
+                return this->start->end();
+            throw std::runtime_error("List is empty");}
+        const_iterator begin() const {if(start)
+                return this->start->begin() ;
+            throw std::runtime_error("List is empty");}
+        const_iterator end() const {if(start)
+                return this->start->end();
+            throw std::runtime_error("List is empty");}
 };
 
 /*********************************************************************************************************************/
