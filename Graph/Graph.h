@@ -11,14 +11,18 @@ namespace Djikstra_Data {
     public:
         //Constructeurs
         Graph() : verticesList() {};                                                // Sans argument
-        explicit Graph(size_t verticesSize) : verticesList(verticesSize) {};   // Avec une taille de liste donnée
+        explicit Graph(size_t verticesSize) : verticesList(verticesSize) {};        // Avec une taille de liste donnée
         explicit Graph(const Graph &graph) : verticesList(graph.verticesList) {};   // Par copie
+
         //Destructeur
         ~Graph() = default;
+
         //Operations
-        void addSommet(const Sommet &sommet) { verticesList.add(sommet); };                 // Ajoute un sommet à la liste
+        void addSommet(const Sommet &sommet) { verticesList.add(sommet); };                  // Ajoute un sommet à la liste
         void addSommets(const T_List<Sommet> &sommets) { this->verticesList.add(sommets); }; // Ajoute une liste de sommets
-        inline bool isEmpty() { return verticesList.length() == 0; };                            // Retourne si la liste est vide
+        inline bool isEmpty() { return verticesList.length() == 0; };                        // Retourne si la liste est vide
+        inline size_t length() { return verticesList.length(); };                            // Retourne la taille de la liste de sommets
+
         //Operateurs
         friend std::ostream &operator<<(std::ostream &ostream, const Graph &graph);
         Sommet operator [](size_t i);

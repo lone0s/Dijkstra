@@ -19,30 +19,37 @@ class T_PriorityQueue {
         T_PriorityQueue() : start(nullptr) {};                                                      // Sans argument
         explicit T_PriorityQueue(const T &elem) : start(new T_Node<T>(elem)) {};                    // Avec un element
         T_PriorityQueue(const T_PriorityQueue<T> &pQueue) : start(new T_Node<T>(*pQueue.start)) {}; // Par copie
+
         //Destructeur
         ~T_PriorityQueue() {
             if (this->start)
                 delete start;
         }
+
         //Operations
         void add(const T &elem);                                                // Ajoute un element à la fin de la liste
-        T pop();                                                                // Retire le premier element de la liste
+        T pop();                                                                // Retire le premier element de la liste et le retourne
         inline size_t length() const { return (start ? start->length() : 0); }; // Retourne la taille de la liste
         inline bool isEmpty() const { return this->start; };                    // Retourne si la file est vide
+        inline T top(size_t i) const {                                          // Retourne l'element à la position i (sans suppr)
+            return (start ? start -> get(0) : throw std::runtime_error("Queue is empty !\n"));
+        };
+
         //Operateurs
         template<typename U>
         friend std::ostream &operator<<(std::ostream &ostream, const T_PriorityQueue<U> &list); //Affichage
+
         //Iterateurs
-        iterator begin() {if(start)                         // Retourne un pointeur vers le premier element
+        inline iterator begin() {if(start)                  // Retourne un pointeur vers le premier element
                 return this->start->begin() ;
             throw std::runtime_error("List is empty");}
-        iterator end() {if(start)                           // Retourne un pointeur vers le dernier element
+        inline iterator end() {if(start)                    // Retourne un pointeur vers le dernier element
                 return this->start->end();
         throw std::runtime_error("List is empty");}
-        const_iterator begin() const {if(start)             // Retourne un pointeur constant vers le premier element
+        inline const_iterator begin() const {if(start)      // Retourne un pointeur constant vers le premier element
                 return this->start->begin() ;
         throw std::runtime_error("List is empty");}
-        const_iterator end() const {if(start)               // Retourne un pointeur constant vers le dernier element
+        inline const_iterator end() const {if(start)        // Retourne un pointeur constant vers le dernier element
                 return this->start->end();
         throw std::runtime_error("List is empty");}
 };
