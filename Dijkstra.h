@@ -7,7 +7,7 @@
 
 class Dijkstra {
     private:
-        Djikstra_Data::Graph* graph;
+        Dijkstra_DataTypes::Graph* graph;
         void loadFile(const std::string& filepath);
         inline bool fileHasBeenLoaded() {return (graph && !graph->isEmpty()); };
     public:

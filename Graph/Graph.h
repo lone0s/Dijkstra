@@ -5,46 +5,33 @@
 #include "Sommet.h"
 #include "../DataStructures/T_List.h"
 
-namespace Djikstra_Data {
+namespace Dijkstra_DataTypes {
     class Graph {
         T_List<Sommet> verticesList;    // Liste des sommets du graphe
     public:
         //Constructeurs
         Graph() : verticesList() {};                                                // Sans argument
         explicit Graph(size_t verticesSize) : verticesList(verticesSize) {};        // Avec une taille de liste donnée
-        explicit Graph(const Graph &graph) : verticesList(graph.verticesList) {};   // Par copie
+        Graph(const Graph &graph) : verticesList(graph.verticesList) {};            // Par copie
 
         //Destructeur
         ~Graph() = default;
 
         //Operations
-        void addSommet(const Sommet &sommet) { verticesList.add(sommet); };                  // Ajoute un sommet à la liste
-        void addSommets(const T_List<Sommet> &sommets) { this->verticesList.add(sommets); }; // Ajoute une liste de sommets
-        inline bool isEmpty() { return verticesList.length() == 0; };                        // Retourne si la liste est vide
-        inline size_t length() { return verticesList.length(); };                            // Retourne le nombre de sommets
+        inline void addSommet(const Sommet &sommet) { verticesList.add(sommet); };            // Ajoute un sommet à la liste
+        inline void addSommets(const T_List<Sommet> &sommets) { verticesList.add(sommets); }; // Ajoute une liste de sommets
+        inline bool isEmpty() { return verticesList.length() == 0; };                         // Retourne si la liste est vide
+        inline size_t length() { return verticesList.length(); };                             // Retourne le nombre de sommets
+        inline T_List<Sommet> getVerticesList() const { return this->verticesList; };         // Retourne la liste des sommets
 
         //Operateurs
-        friend std::ostream &operator<<(std::ostream &ostream, const Graph &graph);
+        friend std::ostream &operator<<(std::ostream &ostream, const Graph &graph){
+            std::cout << "{\n";
+            for (size_t i = 0; i < graph.getVerticesList().length(); ++i)
+                std::cout << graph.getVerticesList().get(i);
+            std::cout << "}\n";
+            return ostream;
+        };
         Sommet operator [](size_t i);
     };
-
-/******************************************* SURCHARGE OPERATEUR *****************************************************/
-
-    /**
-     * @brief Surcharge de l'operateur << pour afficher un graphe
-     * @param ostream le flux de sortie
-     * @param graph le graphe à afficher
-     * @return
-     */
-    std::ostream &operator<<(std::ostream &ostream, const Graph &graph) {
-        std::cout << "{\n";
-        for (size_t i = 0; i < graph.verticesList.length(); ++i)
-            std::cout << graph.verticesList.get(i);
-        std::cout << "}\n";
-        return ostream;
-    }
-
-    Sommet Graph::operator[](size_t i) {
-        return this -> verticesList.get(i);
-    }
 }
