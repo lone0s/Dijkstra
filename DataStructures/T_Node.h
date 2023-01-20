@@ -106,8 +106,7 @@ template<typename T>
 void T_Node<T>::add(const T &elem) {
     if (this -> size == this -> capacity)
         reallocMore();
-    data[size++] = elem;
-    size += 1;
+    data[size++] = elem; // Incrémente par la même occasion l'attribut size
 }
 
 /**
@@ -124,7 +123,7 @@ void T_Node<T>::add(const T_Node<T> &node) {
 }
 
 /**
- * @brief Supprime l'element à la position i
+ * @brief Supprime l'element à la position i et diminue la taille du tableau manipulé par la liste si necessaire
  * @tparam T type determiné à la compilation
  * @param index position de l'element à supprimer
  */
@@ -133,7 +132,7 @@ void T_Node<T>::remove(size_t index) {
     if (index >= 0 && index < size) {
         std::move(data + index + 1, data + size, data + index);
         size--;
-        if (size < capacity / 2)    //Si la capacité du tableau est trop grande par rapport aux données qu'il contient
+        if (size <= capacity / 2)    //Si la capacité du tableau est trop grande par rapport aux données qu'il contient
             reallocLess();          //On diminue sa taille
         }
     else
