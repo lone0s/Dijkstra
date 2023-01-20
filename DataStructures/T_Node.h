@@ -133,9 +133,9 @@ void T_Node<T>::remove(size_t index) {
     if (index >= 0 && index < size) {
         std::move(data + index + 1, data + size, data + index);
         size--;
-        if (size < capacity / 2) {   //Si la capacité du tableau est trop grande par rapport aux données qu'il contient
+        if (size < capacity / 2)    //Si la capacité du tableau est trop grande par rapport aux données qu'il contient
             reallocLess();          //On diminue sa taille
-        } else
-            throw std::invalid_argument("List indices go from 0 to " + std::to_string(this->size));
-    }
+        }
+    else
+        throw std::invalid_argument("List indices go from 0 to " + std::to_string(this->size));
 }
