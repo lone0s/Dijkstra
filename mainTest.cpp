@@ -20,10 +20,11 @@ int main(int argc, char* argv[])
             std::cout << "Entrez le noeud de depart : ";
             std::cin >> s;
 
-            std::ostream* outstream; 
+            std::ostream* outstream;
             outstream = &std::cout;
             //(*outstream) << "hello world" << std::endl;
-            dijkstra(infile, s, outstream);
+
+
             break;
 
         case 2:
@@ -66,6 +67,8 @@ int main(int argc, char* argv[])
         std::cerr << "Impossible d'ouvrir le fichier d'entrée !\n";
         return 1;
     }
+
+    dijkstra(infile, s, outstream);
 
     return 0;
 }

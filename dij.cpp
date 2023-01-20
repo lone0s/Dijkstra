@@ -9,13 +9,16 @@ inline void dijkstra(std::ifstream& infile, int s,const std::ostream* outstream)
     std::string line;
     std::getline(infile, line);
 
+    //insert into int n first char of line
     int n = std::stoi(line);
     Graph graph(n);
 
     bool newNode = true;
+
     Sommet sommet;
     while (std::getline(infile, line)) {
         if (newNode) {
+
             int id = std::stoi(line);
             int successeur = std::stoi(line.substr(line.find(" ") + 1));
             int weight = std::stoi(line.substr(line.find(" ", line.find(" ") + 1) + 1));
@@ -30,8 +33,7 @@ inline void dijkstra(std::ifstream& infile, int s,const std::ostream* outstream)
                 graph.addSommet(sommet);
                 newNode = true;
             }
-                
-                
+
             else {
                 int successeur = std::stoi(line);
                 int weight = std::stoi(line.substr(line.find(" ") + 1));
@@ -42,5 +44,7 @@ inline void dijkstra(std::ifstream& infile, int s,const std::ostream* outstream)
     }
     std::cout << graph << std::endl;
     std::cout << "Sommet de depart : " << s << std::endl;
+
+
 }
 
