@@ -28,12 +28,14 @@ class T_Node {
         explicit T_Node(size_t size) : size(0), capacity(size), data(new T[capacity]) {
             #undef BASE_SIZE        //On enlève la définition de BASE_SIZE
             #define BASE_SIZE size  // On la réintroduit avec pour nouvelle valeur, celle fournie par l'utilisateur
-        };
+        };                      // Permet ainsi de redéfinir le tableau suivant une taille fournie par l'utilisateur
+
         //Destructeur
         ~T_Node() {
             if(data)
                 delete[] data;
         }
+
         //Operations
         T get(size_t i);                                      // Retourne l'element à la position i
         T* getData() {return this -> data;};                  // Retourne le tableau de données
@@ -41,6 +43,7 @@ class T_Node {
         void add(const T_Node<T>& node);                      // Ajoute les elements d'un noeud à la fin du tableau
         void remove(size_t index);                            // Supprime l'element à la position i
         inline size_t length() const {return this -> size;} ; // Retourne la taille accessible à du tableau
+
         //Iterateurs
         iterator begin() {return &data[0];}                   // Retourne un pointeur vers le premier element
         const_iterator begin() const {return &data[0];}       // Retourne un pointeur constant vers le premier element
@@ -104,6 +107,7 @@ void T_Node<T>::add(const T &elem) {
     if (this -> size == this -> capacity)
         reallocMore();
     data[size++] = elem;
+    size += 1;
 }
 
 /**
