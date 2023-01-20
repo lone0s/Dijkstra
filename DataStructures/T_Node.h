@@ -29,7 +29,8 @@ class T_Node {
             #undef BASE_SIZE        //On enlève la définition de BASE_SIZE
             #define BASE_SIZE size  // On la réintroduit avec pour nouvelle valeur, celle fournie par l'utilisateur
         };                      // Permet ainsi de redéfinir le tableau suivant une taille fournie par l'utilisateur
-
+        T_Node(const T_Node<T>& node) : size(node.size), capacity(node.capacity), data(new T[capacity]) {
+            std::move(node.data, node.data + node.size, data); };
         //Destructeur
         ~T_Node() {
             if(data)
@@ -138,3 +139,4 @@ void T_Node<T>::remove(size_t index) {
     else
         throw std::invalid_argument("List indices go from 0 to " + std::to_string(this->size));
 }
+

@@ -41,7 +41,7 @@ class T_PriorityQueue {
         //Operateurs
         template<typename U>
         friend std::ostream &operator<<(std::ostream &ostream, const T_PriorityQueue<U> &list); //Affichage
-
+        T_PriorityQueue& operator = (const T_PriorityQueue<T> &pQueue); //Surcharge de l'operateur =
         //Iterateurs
         inline iterator begin() {if(start)                  // Retourne un pointeur vers le premier element
                 return this->start->begin() ;
@@ -144,4 +144,14 @@ T T_PriorityQueue<T>::pop() {
         return elem;
     }
     throw std::runtime_error("Queue is empty");
+}
+
+template<typename T>
+T_PriorityQueue<T> &T_PriorityQueue<T>::operator=(const T_PriorityQueue<T> &pQueue) {
+    if (this != &pQueue) {
+        if (this->start)
+            delete this->start;
+        this->start = new T_Node<T>(*pQueue.start);
+    }
+    return *this;
 }

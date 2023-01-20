@@ -5,12 +5,12 @@
 #include "Graph/Graph.h"
 
 using namespace Dijkstra_DataTypes;
-void dijkstra(std::ifstream& infile, int s,const std::ostream* outstream) {
+inline void dijkstra(std::ifstream& infile, int s,const std::ostream* outstream) {
     std::string line;
     std::getline(infile, line);
 
     int n = std::stoi(line);
-    Graph graph((size_t)n);
+    Graph graph(n);
 
     bool newNode = true;
     Sommet sommet;
