@@ -27,8 +27,8 @@ class T_Node {
         explicit T_Node(const T& elem) : size(1), capacity(BASE_SIZE), data(new T[capacity]{elem}) {};
         explicit T_Node(size_t size) : size(0), capacity(size), data(new T[capacity]) {
             #undef BASE_SIZE        //On enlève la définition de BASE_SIZE
-            #define BASE_SIZE size  // On la réintroduit avec pour nouvelle valeur, celle fournie par l'utilisateur
-        };                      // Permet ainsi de redéfinir le tableau suivant une taille fournie par l'utilisateur
+            #define BASE_SIZE size  // On la réintroduit avec pour nouvelle valeur celle fournie par l'utilisateur
+        };                          // Permet ainsi de redéfinir le tableau suivant une taille fournie par l'utilisateur
         T_Node(const T_Node<T>& node) : size(node.size), capacity(node.capacity), data(new T[capacity]) {
             for(size_t i = 0; i < size; i++)
                 data[i] = node.data[i];

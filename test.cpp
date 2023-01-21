@@ -27,7 +27,7 @@ int main() {
     priorityQueue = priorityQueue1;
     cout << priorityQueue;
     cout << priorityQueue1;*/
-    Sommet a;
+    /*Sommet a;
     Sommet b;
     cout << a;
     cout << b;
@@ -45,4 +45,21 @@ int main() {
     graph1 = graph;
     cout << graph;
     cout << graph1;
+    */
+    T_List<int> a;
+    a.add(1);
+    T_List<int> b;
+    b.add(2);
+    cout << a;
+    cout << b;
+    a = b;
+    cout << a;
+    cout << b;
+    a.add(1);
+    cout << a;
+    cout << b;
+    b.add(3);
+    cout << a;
+    cout << b;
+    return 0;
 }
