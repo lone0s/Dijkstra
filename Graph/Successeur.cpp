@@ -12,7 +12,7 @@ Successeur &Successeur::operator=(const Successeur &successor) {
     return *this;
 }
 bool Successeur::operator==(const Successeur &successor) const {
-    return (this->successeur->getId() == successor.getSuccessor()->getId()
+    return (this->successeur == successor.getSuccessorId()
          && this->weight == successor.weight);
 }
 /*std::ostream &operator<<(std::ostream &ostream, const Successeur& successor) {

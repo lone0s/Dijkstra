@@ -22,6 +22,7 @@ namespace Dijkstra_DataTypes{
                 return ostream;
             };
             Sommet &operator=(const Sommet &sommet);
+            bool operator==(const Sommet &sommet) const;
             Successeur operator[](const size_t i);
             inline void addSuccesseur(const Successeur &successor) {                 // Ajoute un successeur à la liste
                 this->adjacencyList.add(successor);
