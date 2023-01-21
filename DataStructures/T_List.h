@@ -29,6 +29,7 @@ class T_List {
         inline size_t length() const {return (start ? start->length() : 0);} ; // Retourne la taille de la liste
         inline bool isEmpty() const {return this -> start;};                   // Retourne si la liste est vide
         inline T get(size_t i) const;                                          // Retourne l'element à la position i
+        inline T find(const T& elem) const;
         void add(const T& elem);                                               // Ajoute un element à la fin de la liste
         void add(const T_List<T>& list);                                       // Ajoute les elements d'une liste
         void remove(size_t i);                                                 // Supprime l'element à la position i
@@ -58,6 +59,7 @@ class T_List {
             throw std::runtime_error("List is empty");
         }
 };
+
 
 /******************************************* SURCHARGE OPERATEUR *****************************************************/
 
@@ -150,4 +152,15 @@ T T_List<T>::get(size_t i) const {
     return this -> start->get(i);
 }
 
+/**
+ * Retourne l'element correspondant à celui recherché, lève une exception si l'élément n'est pas dans la liste
+ * @tparam T
+ * @param elem
+ * @return
+ */
+
+template<typename T>
+T T_List<T>::find(const T &elem) const {
+    return this -> start->find(elem);
+}
 

@@ -3,30 +3,32 @@
 //
 #pragma once
 #include <ostream>
+#include "Sommet.h"
 
 namespace Dijkstra_DataTypes {
     class Successeur {
     private:
-        int idVertex;   // Identifie le sommet successeur
-        int weight;     // Cout du chemin entre un sommet à définir et ce sommet successeur
+        Sommet* successeur;   // Identifie le successeur successeur
+        int weight;     // Cout du chemin entre un successeur à définir et ce successeur successeur
+
     public:
         //Constructeurs
-        Successeur(const int id, const int weight) : idVertex(id), weight(weight) {}; // Avec deux arguments
-        Successeur() : idVertex(-1), weight(-1) {};                                   // Sans argument
+        Successeur(Sommet* id, const int weight) : successeur(id), weight(weight) {}; // Avec deux arguments
+        Successeur() : successeur(nullptr), weight(-1) {};                                   // Sans argument
         //Destructeur
         ~Successeur() = default;
 
         //Operations
-        inline int getSuccessorId() const { return this->idVertex; };   // Retourne l'id du sommet successeur
-        inline int getSuccessorWeight() const { return this->weight; }; // Retourne le cout [sommet x -> successeur]
+        inline Sommet* getSuccessor() const { return this->successeur; };   // Retourne l'id du successeur successeur
+        inline int getSuccessorWeight() const { return this->weight; }; // Retourne le cout [successeur x -> successeur]
         //Operateurs
         Successeur &operator=(const Successeur &successor);
 
         inline bool operator==(const Successeur &successor) const;
 
         friend std::ostream &operator<<(std::ostream &ostream, const Successeur &successor) {
-            ostream << "[successeur : " << successor.getSuccessorId() <<
-            " | cout : " << successor.getSuccessorWeight() << "]";
+            ostream << "[successeur : " << successor.getSuccessor()->getId() <<
+                    " | cout : " << successor.getSuccessorWeight() << "]";
             return ostream;
         };
 

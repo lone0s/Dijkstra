@@ -6,13 +6,14 @@
 using namespace Dijkstra_DataTypes;
 Successeur &Successeur::operator=(const Successeur &successor) {
     if (this != &successor) {
-        this->idVertex = successor.idVertex;
+        this->successeur = successor.successeur;
         this->weight = successor.weight;
     }
     return *this;
 }
 bool Successeur::operator==(const Successeur &successor) const {
-    return (this->idVertex == successor.idVertex && this->weight == successor.weight);
+    return (this->successeur->getId() == successor.getSuccessor()->getId()
+         && this->weight == successor.weight);
 }
 /*std::ostream &operator<<(std::ostream &ostream, const Successeur& successor) {
 

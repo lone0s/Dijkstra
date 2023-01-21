@@ -14,7 +14,7 @@ Il faut ainsi :
 
 L'exécutable produit devra permettre à l'utilisateur d'intéragir suivant trois arguments requis, qui sont soit précisés par ce dernier, soit lui sont demandés.
 
-Ces paramètres lui permettront de définir le point d'entrée (le graphe à traiter), le numéro du sommet de départ à partir duquel les plus courts chemins sont établis et la sortie, standard ou dans un fichier.
+Ces paramètres lui permettront de définir le point d'entrée (le graphe à traiter), le numéro du successeur de départ à partir duquel les plus courts chemins sont établis et la sortie, standard ou dans un fichier.
  
 
 ## Consignes d'exécution

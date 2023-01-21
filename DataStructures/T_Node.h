@@ -41,6 +41,7 @@ class T_Node {
 
         //Operations
         T get(size_t i);                                      // Retourne l'element à la position i
+        T find(const T& elem);                                // Retourne l'element à la position i
         T* getData() {return this -> data;};                  // Retourne le tableau de données
         void add(const T& elem);                              // Ajoute un element à la fin du tableau
         void add(const T_Node<T>& node);                      // Ajoute les elements d'un noeud à la fin du tableau
@@ -115,6 +116,14 @@ T T_Node<T>::get(const size_t i) {
     if (i >= 0 && i < size)
         return data[i];
     throw std::invalid_argument("List indices go from 0 to " + std::to_string(this->size));
+}
+
+template<typename T>
+T T_Node<T>::find(const T &elem) {
+    for(T& i : *this)
+        if(i == elem)
+            return i;
+    throw std::out_of_range("Element not found");
 }
 
 /**
