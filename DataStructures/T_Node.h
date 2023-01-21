@@ -30,7 +30,9 @@ class T_Node {
             #define BASE_SIZE size  // On la réintroduit avec pour nouvelle valeur, celle fournie par l'utilisateur
         };                      // Permet ainsi de redéfinir le tableau suivant une taille fournie par l'utilisateur
         T_Node(const T_Node<T>& node) : size(node.size), capacity(node.capacity), data(new T[capacity]) {
-            std::move(node.data, node.data + node.size, data); };
+            for(size_t i = 0; i < size; i++)
+                data[i] = node.data[i];
+        };
         //Destructeur
         ~T_Node() {
             if(data)
@@ -50,7 +52,24 @@ class T_Node {
         const_iterator begin() const {return &data[0];}       // Retourne un pointeur constant vers le premier element
         iterator end() {return &data[size];}                  // Retourne un pointeur vers le dernier element
         const_iterator end() const {return &data[size];}      // Retourne un pointeur constant vers le dernier element
+
+        //Surcharge d'operateurs
+        T_Node<T>& operator=(const T_Node<T>& node);
 };
+
+template<typename T>
+T_Node<T> &T_Node<T>::operator=(const T_Node<T> &node) {
+    if(this != &node) {
+        if(data)
+            delete[] data;
+        size = node.size;
+        capacity = node.capacity;
+        data = new T[capacity];
+        for(size_t i = 0; i < size; i++)
+            data[i] = node.data[i];
+    }
+    return *this;
+}
 
 /********************************************* PRIVATE FUNCTIONS *****************************************************/
 

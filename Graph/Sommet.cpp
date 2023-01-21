@@ -14,12 +14,16 @@ using namespace Dijkstra_DataTypes;
  * @return
  */
 
-/*std::ostream& operator<<(std::ostream &ostream, const Sommet &sommet) {
-
-}*/
-
 Successeur Sommet::operator[](const size_t i) {
     return this -> adjacencyList.get(i);
+}
+
+Sommet &Sommet::operator=(const Sommet &sommet) {
+    if (this != &sommet) {
+        this->idVertex = sommet.idVertex;
+            this->adjacencyList = sommet.adjacencyList;
+    }
+    return *this;
 }
 
 

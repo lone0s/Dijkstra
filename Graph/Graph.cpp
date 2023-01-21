@@ -20,3 +20,19 @@ using namespace Dijkstra_DataTypes;
 Sommet Graph::operator[](size_t i) {
     return this -> verticesList.get(i);
 }
+
+Graph &Graph::operator=(const Graph &graph) {
+    if (this != &graph) {
+
+        this->verticesList = graph.verticesList;
+    }
+    return *this;
+}
+
+std::ostream &Dijkstra_DataTypes::operator<<(std::ostream &ostream, const Graph &graph) {
+    std::cout << "{\n";
+    for (size_t i = 0; i < graph.getVerticesList().length(); ++i)
+        std::cout << graph.getVerticesList().get(i);
+    std::cout << "}\n";
+    return ostream;
+}

@@ -13,7 +13,7 @@ namespace Dijkstra_DataTypes {
         Graph() : verticesList() {};                                                // Sans argument
         explicit Graph(size_t verticesSize) : verticesList(verticesSize) {};        // Avec une taille de liste donnée
         Graph(const Graph &graph) : verticesList(graph.verticesList) {};            // Par copie
-
+        bool isEmpty() const { return this->verticesList.length() == 0; };          // Retourne si la liste est vide
         //Destructeur
         ~Graph() = default;
 
@@ -25,13 +25,8 @@ namespace Dijkstra_DataTypes {
         inline T_List<Sommet> getVerticesList() const { return this->verticesList; };         // Retourne la liste des sommets
 
         //Operateurs
-        friend std::ostream &operator<<(std::ostream &ostream, const Graph &graph){
-            std::cout << "{\n";
-            for (size_t i = 0; i < graph.getVerticesList().length(); ++i)
-                std::cout << graph.getVerticesList().get(i);
-            std::cout << "}\n";
-            return ostream;
-        };
+        friend std::ostream &operator<<(std::ostream &ostream, const Graph &graph);
         Sommet operator [](size_t i);
+        Graph &operator=(const Graph &graph);
     };
 }

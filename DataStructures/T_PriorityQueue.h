@@ -151,7 +151,10 @@ T_PriorityQueue<T> &T_PriorityQueue<T>::operator=(const T_PriorityQueue<T> &pQue
     if (this != &pQueue) {
         if (this->start)
             delete this->start;
-        this->start = new T_Node<T>(*pQueue.start);
+        if (pQueue.start)
+            this->start = new T_Node<T>(*pQueue.start);
+        else
+            this->start = nullptr;
     }
     return *this;
 }

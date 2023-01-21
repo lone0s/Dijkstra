@@ -9,11 +9,11 @@
 namespace Dijkstra_DataTypes{
     class Sommet {
         private:
-            size_t idVertex;                    // Identifiant du sommet
+            int idVertex;                    // Identifiant du sommet
             T_List<Successeur> adjacencyList;    // Liste des successeurs du sommet
         public:
             //Constructeurs
-            explicit Sommet(const size_t id) : idVertex(id), adjacencyList() {};    // Avec un argument
+            explicit Sommet(const int id) : idVertex(id), adjacencyList() {};    // Avec un argument
             Sommet() : idVertex(-1), adjacencyList() {};                            // Sans argument
             //Destructor
             ~Sommet() = default;
@@ -21,6 +21,7 @@ namespace Dijkstra_DataTypes{
                 std::cout << "Sommet: " << sommet.getId() << " - " << sommet.getAdjacencyList();
                 return ostream;
             };
+            Sommet &operator=(const Sommet &sommet);
             Successeur operator[](const size_t i);
             inline void addSuccesseur(const Successeur &successor) {                 // Ajoute un successeur à la liste
                 this->adjacencyList.add(successor);
@@ -29,6 +30,6 @@ namespace Dijkstra_DataTypes{
                 this->adjacencyList.add(listSuccesseurs);
             }
             inline T_List<Successeur> getAdjacencyList() const { return this->adjacencyList; }
-            inline size_t getId() const { return this->idVertex; }
+            inline int getId() const { return this->idVertex; }
     };
 }

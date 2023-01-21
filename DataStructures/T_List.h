@@ -16,7 +16,10 @@ class T_List {
         T_List() : start(nullptr) {};                                           // Sans argument
         explicit T_List(const T& elem) : start(new T_Node<T>(elem)) {};         // Avec un element
         explicit T_List(size_t size) : start(new T_Node<T>(size)) {};           // Avec une taille donnée
-        T_List(const T_List<T>& list) : start(new T_Node<T>(*list.start)) {};   // Par copie
+        T_List(const T_List<T>& list) {list.start
+        ? start = new T_Node<T>(*list.start)
+        : start = nullptr;
+        };   // Par copie
         //Destructeur
         ~T_List() {
             if (this -> start)
@@ -86,8 +89,12 @@ std::ostream& operator << (std::ostream& ostream, const T_List<T>& list) {
 template<typename T>
 T_List<T> &T_List<T>::operator=(const T_List<T> &list) {
     if (this != &list){
-        delete start;
-        this -> start = new T_Node<T>(*list.start);
+        if(start)
+            delete start;
+        if (list.start)
+            this -> start = new T_Node<T>(*list.start);
+        else
+            this -> start = nullptr;
     }
     return *this;
 }
