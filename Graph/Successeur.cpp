@@ -12,12 +12,15 @@ Successeur &Successeur::operator=(const Successeur &successor) {
     return *this;
 }
 bool Successeur::operator==(const Successeur &successor) const {
-    return (this->successeur == successor.getSuccessorId()
-         && this->weight == successor.weight);
+    return (this->successeur == successor.getVertexId());
 }
-/*std::ostream &operator<<(std::ostream &ostream, const Successeur& successor) {
 
-}*/
+bool Successeur::operator|=(const Successeur &successor) const {
+    return (this->successeur == successor.getVertexId() && this->weight == successor.getWeight());
+}
+
+
 bool Successeur::operator>(const Successeur &successor) const {
     return this->weight > successor.weight;
 }
+

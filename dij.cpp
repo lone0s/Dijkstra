@@ -19,20 +19,21 @@ inline void dijkstra(std::ifstream& infile, int s, std::ostream* outstream) {
     Graph graph(n);
 
     bool newNode = true;
-    std::unique_ptr<Sommet> sommet;
+    Sommet temp;
     while (std::getline(infile, line)) {
         std::istringstream iss(line);
         if (newNode) {
             int id, successeur, weight;
             iss >> id;
             iss >> successeur;
-            sommet = std::make_unique<Sommet>(id);
+            temp = Sommet(id);
+/*            sommet = std::make_unique<Sommet>(id);*/
             if (successeur == 0) {
-                graph.addSommet(*sommet);
+                graph.addSommet(temp);
             } else {
                 iss >> weight;
                 Successeur succ(successeur, weight);
-                sommet->addSuccesseur(succ);
+                temp.addSuccesseur(succ);
                 newNode = false;
             }
 
@@ -40,12 +41,12 @@ inline void dijkstra(std::ifstream& infile, int s, std::ostream* outstream) {
             int successeur, weight;
             iss >> successeur;
             if (successeur == 0) {
-                graph.addSommet(*sommet);
+                graph.addSommet(temp);
                 newNode = true;
             } else {
                 iss >> weight;
                 Successeur succ(successeur, weight);
-                sommet->addSuccesseur(succ);
+                temp.addSuccesseur(succ);
             }
         }
     }
