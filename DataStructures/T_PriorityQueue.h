@@ -1,5 +1,5 @@
 //
-// Created by jeune on 17/01/2023.
+// Created by jeune on 23/12/2022.
 //
 #pragma once
 #include "T_Node.h"
@@ -12,6 +12,9 @@ class T_PriorityQueue {
         //Methode du tri par tas
         void rearrange(size_t indexMin, size_t indexMax);   //Methode qui permet de remettre en ordre le tas
         void heapSort(size_t index);                        //Methode qui permet de trier le tas
+
+        //Methode de recherche
+        inline size_t find(const T &elem) const;            // Retourne la position de l'element
 
         //Iterateurs
         typedef T* iterator;
@@ -37,11 +40,14 @@ class T_PriorityQueue {
         inline T top() const {                                                  // Retourne le premier element
             return (start ? start -> get(0) : throw std::runtime_error("Queue is empty !\n"));
         };
+        inline bool contains(const T &elem) const { return (find(elem) != -1); } // Retourne si l'element est dans la liste
+        void updatePriority(const T &elem);                                             // Met a jour l'element
 
         //Operateurs
         template<typename U>
         friend std::ostream &operator<<(std::ostream &ostream, const T_PriorityQueue<U> &list); //Affichage
         T_PriorityQueue& operator = (const T_PriorityQueue<T> &pQueue); //Surcharge de l'operateur =
+
         //Iterateurs
         inline iterator begin() {if(start)                  // Retourne un pointeur vers le premier element
                 return this->start->begin() ;
@@ -78,6 +84,16 @@ std::ostream& operator << (std::ostream& ostream, const T_PriorityQueue<T>& pQue
 }
 
 /********************************************* PRIVATE FUNCTIONS *****************************************************/
+
+template<typename T>
+size_t T_PriorityQueue<T>::find(const T &elem) const {
+    if(start) {
+        for (const T &e: *start)
+            if (e == elem)
+                return &e - start->begin();
+    }//Retourne la position de l'element
+    return -1;
+}
 
 /**
  * @brief Methode qui permet de remettre en ordre le tas
@@ -144,6 +160,17 @@ T T_PriorityQueue<T>::pop() {
         return elem;
     }
     throw std::runtime_error("Queue is empty");
+}
+
+template<typename T>
+void T_PriorityQueue<T>::updatePriority(const T &elem) {
+    size_t index = find(elem);
+    if(index != -1) {
+        if(start ->get(index) > elem) {
+            start->remove(index);
+            this->add(elem);
+        }
+    }
 }
 
 template<typename T>
