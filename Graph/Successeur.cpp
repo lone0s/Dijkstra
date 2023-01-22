@@ -1,5 +1,5 @@
 //
-// Created by ohno on 1/20/2023.
+// Created by ohno on 23/12/2022.
 //
 
 #include "Successeur.h"
@@ -12,12 +12,15 @@ Successeur &Successeur::operator=(const Successeur &successor) {
     return *this;
 }
 bool Successeur::operator==(const Successeur &successor) const {
-    return (this->successeur == successor.getSuccessorId()
-         && this->weight == successor.weight);
+    return (this->successeur == successor.getSuccessorId());
 }
-/*std::ostream &operator<<(std::ostream &ostream, const Successeur& successor) {
 
-}*/
+bool Successeur::operator|=(const Successeur &successor) const {
+    return (this->successeur == successor.getSuccessorId() && this->weight == successor.getSuccessorWeight());
+}
+
+
 bool Successeur::operator>(const Successeur &successor) const {
     return this->weight > successor.weight;
 }
+
