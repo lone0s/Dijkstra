@@ -1,5 +1,5 @@
 //
-// Created by ohno on 1/20/2023.
+// Created by ohno on 23/12/2022.
 //
 
 #include "Sommet.h"
@@ -13,10 +13,6 @@ using namespace Dijkstra_DataTypes;
  * @param sommet
  * @return
  */
-
-/*std::ostream& operator<<(std::ostream &ostream, const Sommet &successeur) {
-
-}*/
 
 Successeur Sommet::operator[](const size_t i) {
     return this -> adjacencyList.get(i);

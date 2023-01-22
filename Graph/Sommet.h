@@ -1,5 +1,5 @@
 //
-// Created by ohno on 1/16/2023.
+// Created by ohno on 23/12/2022.
 //
 
 #pragma once
@@ -11,12 +11,16 @@ namespace Dijkstra_DataTypes{
         private:
             int idVertex;                    // Identifiant du sommet
             T_List<Successeur> adjacencyList;    // Liste des successeurs du sommet
+            
         public:
             //Constructeurs
             explicit Sommet(const int id) : idVertex(id), adjacencyList() {};    // Avec un argument
             Sommet() : idVertex(-1), adjacencyList() {};                            // Sans argument
-            //Destructor
+            
+            //Destructeur
             ~Sommet() = default;
+            
+            //Operateurs
             friend std::ostream &operator<<(std::ostream &ostream, const Sommet &sommet) {
                 std::cout << "Sommet: " << sommet.getId() << " - " << sommet.getAdjacencyList();
                 return ostream;
@@ -24,6 +28,8 @@ namespace Dijkstra_DataTypes{
             Sommet &operator=(const Sommet &sommet);
             bool operator==(const Sommet &sommet) const;
             Successeur operator[](const size_t i);
+            
+            //Operations
             inline void addSuccesseur(const Successeur &successor) {                 // Ajoute un successeur à la liste
                 this->adjacencyList.add(successor);
             }
