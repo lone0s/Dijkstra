@@ -18,15 +18,11 @@ class Dikestra {
     int* previous;
     
     void loadGraph(std::ifstream& infile);
-
     void run(size_t s);
     void printResult(std::ostream* outfile, size_t startVertex);
 
 public:
     Dikestra(std::ifstream& infile, std::ostream* outfile, size_t startVertex);
     ~Dikestra();
-    
-    inline Sommet getSommet(size_t id) const {return graph.getSommet(id - 1); };
-    inline bool fileHasBeenLoaded() const {return (!graph.isEmpty()); };
 };
 

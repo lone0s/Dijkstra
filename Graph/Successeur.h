@@ -20,8 +20,8 @@ namespace Dijkstra_DataTypes {
         ~Successeur() = default;
 
         //Operations
-        inline int getSuccessorId() const { return this->successeur; };   // Retourne l'id du successeur successeur
-        inline int getSuccessorWeight() const { return this->weight; }; // Retourne le cout [successeur x -> successeur]
+        inline int getId() const { return this->successeur; };   // Retourne l'id du successeur successeur
+        inline int getWeight() const { return this->weight; }; // Retourne le cout [successeur x -> successeur]
         
         //Operateurs
         Successeur &operator=(const Successeur &successor);
@@ -29,8 +29,8 @@ namespace Dijkstra_DataTypes {
         bool operator==(const Successeur &successor) const; // Compare l'identifiant de deux successeurs
         bool operator|=(const Successeur &successor) const; // Compare l'identifiant et le cout de deux successeurs
         friend std::ostream &operator<<(std::ostream &ostream, const Successeur &successor) {
-            ostream << "[successeur : " << successor.getSuccessorId() <<
-                    " | cout : " << successor.getSuccessorWeight() << "]";
+            ostream << "[successeur : " << successor.getId() <<
+                    " | cout : " << successor.getWeight() << "]";
             return ostream;
         };
     };

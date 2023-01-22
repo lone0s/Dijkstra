@@ -12,11 +12,11 @@ Successeur &Successeur::operator=(const Successeur &successor) {
     return *this;
 }
 bool Successeur::operator==(const Successeur &successor) const {
-    return (this->successeur == successor.getSuccessorId());
+    return (this->successeur == successor.getId());
 }
 
 bool Successeur::operator|=(const Successeur &successor) const {
-    return (this->successeur == successor.getSuccessorId() && this->weight == successor.getSuccessorWeight());
+    return (this->successeur == successor.getId() && this->weight == successor.getWeight());
 }
 
 

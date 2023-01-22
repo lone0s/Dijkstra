@@ -95,8 +95,8 @@ inline void dijkstra(std::ifstream& infile, int s, std::ostream* outstream) {
         //on parcourt tous les successeurs du sommet courant
         for (size_t j = 0; j < graph[sommetId].getAdjacencyList().length(); j++) {
             //on recupere le successeur et son cout
-            int successeurId = graph[sommetId].getAdjacencyList().get(j).getSuccessorId()-1;
-            int successeurWeight = graph[sommetId].getAdjacencyList().get(j).getSuccessorWeight();
+            int successeurId = graph[sommetId].getAdjacencyList().get(j).getId() - 1;
+            int successeurWeight = graph[sommetId].getAdjacencyList().get(j).getWeight();
 
             //on met à jour les couts et les sommets précédents
 
