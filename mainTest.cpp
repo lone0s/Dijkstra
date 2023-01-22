@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "dij.cpp"
+#include "Dikestra.h"
 
 int main(int argc, char* argv[])
 {
@@ -68,7 +68,7 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    dijkstra(infile, s, outstream); // on lance l'algorithme de Dijkstra
+    Dikestra dikestra(infile, outstream, s);
 
     return 0;
 }
