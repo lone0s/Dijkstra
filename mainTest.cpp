@@ -7,6 +7,7 @@ int main(int argc, char* argv[])
     std::ifstream infile;
     std::ostream* outstream;
     std::string infile_name;
+    std::ofstream ofile;
     int s;
 
     switch (argc)
@@ -49,15 +50,9 @@ int main(int argc, char* argv[])
             infile.open(argv[1]);
             s = std::atoi(argv[2]);
 
-            std::ofstream ofile; 
             ofile.open(argv[3]);
-            outstream = &ofile; 
+            outstream = &ofile;
 
-            if (!ofile.is_open()) // si le fichier de sortie n'a pas pu être ouvert
-            {
-                std::cerr << "Impossible d'ouvrir le fichier de sortie !\n";
-                return 1;
-            }
 
             break;
     }
@@ -67,6 +62,13 @@ int main(int argc, char* argv[])
         std::cerr << "Impossible d'ouvrir le fichier d'entrée !\n";
         return 1;
     }
+
+    if (!outstream->good()) // si le fichier de sortie n'a pas pu être ouvert
+    {
+        std::cerr << "Impossible d'ouvrir le fichier de sortie !\n";
+        return 1;
+    }
+
 
     Dikestra dikestra(infile, outstream, s);
     return 0;
