@@ -11,6 +11,7 @@ int main(int argc, char* argv[])
 
     switch (argc)
     {
+        // pas d'arguments, on demande à l'utilisateur le nom du fichier d'entrée et le noeud de départ. La sortie est sur la console.
         case 1:
 
             std::cout << "Entrez le nom du fichier d'entrée : ";
@@ -19,13 +20,11 @@ int main(int argc, char* argv[])
             std::cout << "Entrez le noeud de depart : ";
             std::cin >> s;
 
-            std::ostream* outstream;
             outstream = &std::cout;
-            //(*outstream) << "hello world" << std::endl;
-
 
             break;
 
+        // un seul argument le nom du fichier d'entrée, on demande à l'utilisateur le noeud de départ. La sortie est sur la console.
         case 2:
 
             infile.open(argv[1]);
@@ -35,6 +34,7 @@ int main(int argc, char* argv[])
 
             break;
 
+        // deux arguments le nom du fichier d'entrée et le noeud de départ. La sortie est sur la console.
         case 3:
 
             infile.open(argv[1]);
@@ -43,6 +43,7 @@ int main(int argc, char* argv[])
 
             break;
 
+        // trois arguments le nom du fichier d'entrée, le noeud de départ et le nom du fichier de sortie.
         case 4:
 
             infile.open(argv[1]);
@@ -52,7 +53,7 @@ int main(int argc, char* argv[])
             ofile.open(argv[3]);
             outstream = &ofile; 
 
-            if (!ofile.is_open())
+            if (!ofile.is_open()) // si le fichier de sortie n'a pas pu être ouvert
             {
                 std::cerr << "Impossible d'ouvrir le fichier de sortie !\n";
                 return 1;
@@ -61,13 +62,13 @@ int main(int argc, char* argv[])
             break;
     }
 
-    if (!infile.is_open())
+    if (!infile.is_open()) // si le fichier d'entrée n'a pas pu être ouvert
     {
         std::cerr << "Impossible d'ouvrir le fichier d'entrée !\n";
         return 1;
     }
 
-    dijkstra(infile, s, outstream);
+    dijkstra(infile, s, outstream); // on lance l'algorithme de Dijkstra
 
     return 0;
 }
