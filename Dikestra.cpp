@@ -7,7 +7,8 @@
 Dikestra::Dikestra(std::ifstream& infile, std::ostream* outfile, size_t startVertex) {
 
     loadGraph(infile);
-    run(startVertex);
+    runPrioq(startVertex);
+    //runArray(startVertex);
     printResult(outfile, startVertex);
 
 }
@@ -74,7 +75,66 @@ void Dikestra::loadGraph(std::ifstream &infile) {
 }
 
 
-void Dikestra::run(size_t s) {
+void Dikestra::runPrioq(size_t s) {
+
+    s--; //on décrémente s car les sommets sont numérotés à partir de 1
+
+    pQueue = T_PriorityQueue<Successeur>(); //initialisation de la file de priorité
+
+    //initialisation des tableaux
+    for (int i = 0; i < graphSize; i++) {
+        visited[i] = false;                  //aucun sommet n'est visité
+        couts[i] = INT_MAX;                  //les couts sont initialisés à l'infini
+    }
+    couts[s] = 0; //le cout du sommet de départ est 0
+    visited[s] = true; //on marque le sommet de départ comme visité
+
+    Sommet sommet = graph.getSommet(s); //on récupère le sommet de départ
+
+    //ajout des successeurs du sommet de départ dans la file de priorité
+    for (Successeur successeur : sommet.getAdjacencyList()){
+        pQueue.add(successeur);
+    }
+
+    //cout du top de la file de priorité = cout du sommet de départ
+    couts[pQueue.top().getId()-1] = pQueue.top().getWeight();
+    previous[pQueue.top().getId()-1] = s; //le sommet de départ est le précédent du sommet de la file de priorité
+
+
+    //on parcourt tous les sommets
+    while (!pQueue.length()==0) { //tant que la file de priorité n'est pas vide
+
+        Successeur successeur = pQueue.pop();
+        int id = successeur.getId(); //on récupère l'id du sommet
+        int cout = successeur.getWeight(); //on récupère le cout de l'arête
+
+        visited[id-1] = true; //on marque le sommet comme visité
+
+        Sommet sommet = graph.getSommet(id-1); //on récupère le sommet
+        //on parcourt tous les successeurs du sommet
+        for (size_t j = 0; j < sommet.getAdjacencyList().length(); j++){
+            Successeur succ = graph[sommet.getId()-1].getAdjacencyList().get(j);
+            int idSucc = succ.getId();
+            int coutSucc = succ.getWeight();
+            if (!visited[idSucc-1]) { //si le sommet n'est pas visité
+                if (couts[idSucc-1] > cout + coutSucc) { //si le cout du sommet est supérieur au cout du sommet courant + le cout de l'arête
+                    couts[idSucc-1] = cout + coutSucc; //on met à jour le cout du sommet
+                    previous[idSucc-1] = id; //on met à jour le sommet précédent
+                    succ.setWeight(cout + coutSucc); //on met à jour le cout de l'arête
+                    if(pQueue.contains(succ)){ //si le sommet est déjà dans la file de priorité
+                        pQueue.updatePriority(succ); //on met à jour la priorité du sommet
+                    } else{
+                        pQueue.add(succ); //sinon on ajoute le sommet à la file de priorité
+                    }
+                }
+            }
+        }
+
+    }
+
+}
+
+void Dikestra::runArray(size_t s) {
 
     s--; //on décrémente s car les sommets sont numérotés à partir de 1
 
