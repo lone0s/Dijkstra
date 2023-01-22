@@ -8,6 +8,7 @@
 using namespace Dijkstra_DataTypes;
 
 
+
 inline void dijkstra(std::ifstream& infile, int s, std::ostream* outstream) {
 
     --s; //on décrémente s car dans notre implémentation les sommets sont numérotés de 0 à n et non de 1 à n
