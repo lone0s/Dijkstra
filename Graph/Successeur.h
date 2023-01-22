@@ -22,6 +22,7 @@ namespace Dijkstra_DataTypes {
         //Operations
         inline int getId() const { return this->successeur; };   // Retourne l'id du successeur successeur
         inline int getWeight() const { return this->weight; }; // Retourne le cout [successeur x -> successeur]
+        inline void setWeight(const int weight) { this->weight = weight; }; // Modifie le cout [successeur x -> successeur]
         
         //Operateurs
         Successeur &operator=(const Successeur &successor);
