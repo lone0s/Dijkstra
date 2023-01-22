@@ -1,5 +1,5 @@
 //
-// Created by ohno on 1/18/2023.
+//  Created by jeune on 23/12/2022.
 //
 #pragma once
 #include <iostream>
@@ -14,25 +14,27 @@ class T_Node {
         size_t capacity;
         //Tableau de données
         T* data;
+        
         //Gestion de l'allocation "dynamique"
         void reallocMore();
         void reallocLess();
+        
         //Gestion foreach loop
         typedef T* iterator;
         typedef const T* const_iterator;
 
     public:
         //Constructeurs
-        T_Node() : size(0), capacity(BASE_SIZE), data(new T[capacity]) {};
-        explicit T_Node(const T& elem) : size(1), capacity(BASE_SIZE), data(new T[capacity]{elem}) {};
-        explicit T_Node(size_t size) : size(0), capacity(size), data(new T[capacity]) {
+        T_Node() : size(0), capacity(BASE_SIZE), data(new T[capacity]) {};                              // Sans argument
+        explicit T_Node(const T& elem) : size(1), capacity(BASE_SIZE), data(new T[capacity]{elem}) {};  // Avec un element
+        explicit T_Node(size_t size) : size(0), capacity(size), data(new T[capacity]) {             // Avec une taille donnée
             #undef BASE_SIZE        //On enlève la définition de BASE_SIZE
             #define BASE_SIZE size  // On la réintroduit avec pour nouvelle valeur celle fournie par l'utilisateur
         };                          // Permet ainsi de redéfinir le tableau suivant une taille fournie par l'utilisateur
-        T_Node(const T_Node<T>& node) : size(node.size), capacity(node.capacity), data(new T[capacity]) {
-            for(size_t i = 0; i < size; i++)
-                data[i] = node.data[i];
-        };
+        T_Node(const T_Node<T>& node) : size(node.size), capacity(node.capacity), data(new T[capacity]) // Par copie
+            { for(size_t i = 0; i < size; ++i)
+                data[i] = node.data[i]; };
+        
         //Destructeur
         ~T_Node() {
             if(data)
@@ -57,6 +59,8 @@ class T_Node {
         //Surcharge d'operateurs
         T_Node<T>& operator=(const T_Node<T>& node);
 };
+
+/******************************************* SURCHARGE OPERATEUR *****************************************************/
 
 template<typename T>
 T_Node<T> &T_Node<T>::operator=(const T_Node<T> &node) {

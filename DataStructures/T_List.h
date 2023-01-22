@@ -1,5 +1,5 @@
 //
-// Created by ohno on 1/16/2023.
+// Created by jeune on 23/12/2022
 //
 #pragma once
 #include "T_Node.h"
@@ -8,23 +8,26 @@ template <typename T>
 class T_List {
     private:
         T_Node<T>* start;
+
         //Iterateurs
         typedef T* iterator;
         typedef const T* const_iterator;
+
     public:
         //Constructeurs
         T_List() : start(nullptr) {};                                           // Sans argument
         explicit T_List(const T& elem) : start(new T_Node<T>(elem)) {};         // Avec un element
         explicit T_List(size_t size) : start(new T_Node<T>(size)) {};           // Avec une taille donnée
-        T_List(const T_List<T>& list) {list.start
+        T_List(const T_List<T>& list) { list.start                              // Par copie
         ? start = new T_Node<T>(*list.start)
-        : start = nullptr;
-        };   // Par copie
+        : start = nullptr; };
+
         //Destructeur
         ~T_List() {
             if (this -> start)
                 delete start;
         }
+
         //Operations
         inline size_t length() const {return (start ? start->length() : 0);} ; // Retourne la taille de la liste
         inline bool isEmpty() const {return this -> start;};                   // Retourne si la liste est vide
@@ -33,10 +36,12 @@ class T_List {
         void add(const T& elem);                                               // Ajoute un element à la fin de la liste
         void add(const T_List<T>& list);                                       // Ajoute les elements d'une liste
         void remove(size_t i);                                                 // Supprime l'element à la position i
+
         //Operateurs
         T_List<T>& operator= (const T_List<T>& list);
         template<typename U>
         friend std::ostream& operator <<(std::ostream& ostream,const T_List<U>& list);
+
         //Iterateurs (pour for each loop)
         iterator begin() {                                  // Retourne un pointeur vers le premier element
             if(start)
