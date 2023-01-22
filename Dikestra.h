@@ -3,6 +3,7 @@
 //
 #pragma once
 #include "Graph/Graph.h"
+#include "DataStructures/T_PriorityQueue.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -16,9 +17,11 @@ class Dikestra {
     bool* visited;
     int* couts;
     int* previous;
+    T_PriorityQueue<Successeur> pQueue;  // add this line
     
     void loadGraph(std::ifstream& infile);
-    void run(size_t s);
+    void runPrioq(size_t s);
+    void runArray(size_t s);
     void printResult(std::ostream* outfile, size_t startVertex);
 
 public:
