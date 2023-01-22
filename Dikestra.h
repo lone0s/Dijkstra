@@ -20,10 +20,10 @@ class Dikestra {
     void loadGraph(std::ifstream& infile);
 
     void run(size_t s);
-    void printResult(std::ofstream* outfile);
+    void printResult(std::ostream* outfile, size_t startVertex);
 
 public:
-    Dikestra(std::ifstream& infile, std::ofstream* outfile, size_t startVertex);
+    Dikestra(std::ifstream& infile, std::ostream* outfile, size_t startVertex);
     ~Dikestra();
 };
 
