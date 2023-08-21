@@ -25,7 +25,7 @@ Ces paramètres lui permettront de définir le point d'entrée (le graphe à tra
 
 ## Auteurs
 
-- [Souhaïl Benmoussati](https://www.github.com/lone0s)
+- [lone0s](https://www.github.com/lone0s)
 - Mathis Akerman
 
 ### 
